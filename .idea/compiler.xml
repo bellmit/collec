@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="unicom-wx-mp" />
+        <module name="unicom-common" />
+        <module name="unicom-account" />
+        <module name="collect-api" />
+        <module name="unicom-project" />
+        <module name="unicom-storage" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="collect-api" target="1.8" />
+      <module name="unicom-account" target="1.8" />
+      <module name="unicom-collect" target="1.8" />
+      <module name="unicom-common" target="1.8" />
+      <module name="unicom-project" target="1.8" />
+      <module name="unicom-storage" target="1.8" />
+      <module name="unicom-wx-mp" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/tduck-platform-master/tduck-api/collect-api.iml" filepath="$PROJECT_DIR$/tduck-platform-master/tduck-api/collect-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/tduck-platform-master.iml" filepath="$PROJECT_DIR$/.idea/tduck-platform-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tduck-platform-master/tduck-account/unicom-account.iml" filepath="$PROJECT_DIR$/tduck-platform-master/tduck-account/unicom-account.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tduck-platform-master/unicom-collect.iml" filepath="$PROJECT_DIR$/tduck-platform-master/unicom-collect.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tduck-platform-master/tduck-common/unicom-common.iml" filepath="$PROJECT_DIR$/tduck-platform-master/tduck-common/unicom-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tduck-platform-master/tduck-project/unicom-project.iml" filepath="$PROJECT_DIR$/tduck-platform-master/tduck-project/unicom-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tduck-platform-master/tduck-storage/unicom-storage.iml" filepath="$PROJECT_DIR$/tduck-platform-master/tduck-storage/unicom-storage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tduck-platform-master/tduck-wx-mp/unicom-wx-mp.iml" filepath="$PROJECT_DIR$/tduck-platform-master/tduck-wx-mp/unicom-wx-mp.iml" />
+    </modules>
+  </component>
+</project>

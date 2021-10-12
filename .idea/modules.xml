@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/u-collect/unicom-collect/collect-api/collect-api.iml" filepath="$PROJECT_DIR$/u-collect/unicom-collect/collect-api/collect-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/u-collect.iml" filepath="$PROJECT_DIR$/.idea/u-collect.iml" />
+      <module fileurl="file://$PROJECT_DIR$/u-collect/unicom-collect/unicom-account/unicom-account.iml" filepath="$PROJECT_DIR$/u-collect/unicom-collect/unicom-account/unicom-account.iml" />
+      <module fileurl="file://$PROJECT_DIR$/u-collect/unicom-collect/unicom-collect.iml" filepath="$PROJECT_DIR$/u-collect/unicom-collect/unicom-collect.iml" />
+      <module fileurl="file://$PROJECT_DIR$/u-collect/unicom-collect/unicom-common/unicom-common.iml" filepath="$PROJECT_DIR$/u-collect/unicom-collect/unicom-common/unicom-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/u-collect/unicom-collect/unicom-project/unicom-project.iml" filepath="$PROJECT_DIR$/u-collect/unicom-collect/unicom-project/unicom-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/u-collect/unicom-collect/unicom-storage/unicom-storage.iml" filepath="$PROJECT_DIR$/u-collect/unicom-collect/unicom-storage/unicom-storage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/u-collect/unicom-collect/unicom-wx-mp/unicom-wx-mp.iml" filepath="$PROJECT_DIR$/u-collect/unicom-collect/unicom-wx-mp/unicom-wx-mp.iml" />
+    </modules>
+  </component>
+</project>
