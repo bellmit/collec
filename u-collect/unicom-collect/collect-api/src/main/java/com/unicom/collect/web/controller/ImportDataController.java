@@ -29,7 +29,7 @@ import java.util.*;
 
 
 @RestController
-@RequestMapping("/health/import")
+@RequestMapping("/collect/import")
 public class ImportDataController {
 
 	@Autowired
@@ -153,10 +153,10 @@ public class ImportDataController {
 		head2.add("手机号码");
 
 		List<String> head3 = new ArrayList<String>();
-		head3.add("组织机构");
+		head3.add("所属组");
 
 		List<String> head4 = new ArrayList<String>();
-		head4.add("备注");
+		head4.add("户主身份证");
 
 		list.add(head0);
 		list.add(head1);
@@ -179,8 +179,8 @@ public class ImportDataController {
 		list.add( Lists.newArrayList(basicInfo ,basicInfo,"姓名(必填)") );
 		list.add( Lists.newArrayList(basicInfo ,basicInfo,"身份证(必填)") );
 		list.add( Lists.newArrayList(basicInfo ,basicInfo,"电话(必填)") );
-		list.add( Lists.newArrayList(basicInfo ,basicInfo,"组织机构(下拉框中内容)") );
-		list.add( Lists.newArrayList(basicInfo ,basicInfo,"备注") );
+		list.add( Lists.newArrayList(basicInfo ,basicInfo,"所属村组(下拉框中内容)") );
+		list.add( Lists.newArrayList(basicInfo ,basicInfo,"户主身份证(必填)") );
 //		List<String> head0 = new ArrayList<String>();
 //		head0.add("姓名");
 //		List<String> head1 = new ArrayList<String>();

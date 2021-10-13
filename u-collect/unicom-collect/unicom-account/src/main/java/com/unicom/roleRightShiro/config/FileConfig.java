@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Data
 public class FileConfig {
-	@Value("${unicom.upload.tenderUpload}")
+	@Value("${unicom.upload.collectUpload}")
 	private String upLoadFilePath;
 
 

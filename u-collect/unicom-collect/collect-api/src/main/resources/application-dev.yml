@@ -42,7 +42,7 @@ unicom:
     timeOut: 900 #单位为秒
     useCookie: false #是否使用浏览器cookie
   upload:
-    tenderUpload: d:/upload
+    collectUpload: d:/upload
   requestIntercept:
     isIntercept: true
     isHead: true
