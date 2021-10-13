@@ -85,6 +85,9 @@ public class ImportDataServiceImpl implements ImportDataService {
         }
         Object savePoint = TransactionAspectSupport.currentTransactionStatus().createSavepoint();
         i = this.importDataMapper.insertTel(batch);
+        for(Map<String,Object> k:batch){
+            System.out.println("cccc---"+k.get("id"));
+        }
         int count = this.hUserMapper.countOrg(tuple._2());
         if (count > tuple._3()) {
             TransactionAspectSupport.currentTransactionStatus().rollbackToSavepoint(savePoint);

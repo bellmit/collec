@@ -109,12 +109,14 @@ public interface OrgMapper {
 
     @Insert("insert into sys_organization(name,code,parentId,level,description,address,tel,province_code,city_code,county_code,province,city,county) "
             + "values (#{name},#{code},#{parentId},#{level},#{description},#{address},#{tel},#{provinceCode},#{cityCode},#{county_code},#{province},#{city},#{county})")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int insert(Map<String, Object> parm);
 
-    @Insert("<script> insert into sys_organization (name,code,parentId,level,description,address,tel,province_code,city_code,county_code,province,city,county,t_number,validity,rootId,account_number) "
+    @Insert("<script> insert into sys_organization (id,name,code,parentId,level,description,address,tel,province_code,city_code,county_code,province,city,county,t_number,validity,rootId,account_number) "
             + "        values " + "        <foreach collection='addData' item='org' index='index' separator=','> "
-            + "            (#{org.name},#{org.code},#{org.parentId},#{org.level},#{org.description},#{org.address},#{org.tel},#{org.provinceCode},#{org.cityCode},#{org.countyCode},#{org.province},#{org.city},#{org.county},#{org.tNumber},#{org.validity},#{org.rootId},#{org.accountNumber})"
+            + "            (null,#{org.name},#{org.code},#{org.parentId},#{org.level},#{org.description},#{org.address},#{org.tel},#{org.provinceCode},#{org.cityCode},#{org.countyCode},#{org.province},#{org.city},#{org.county},#{org.tNumber},#{org.validity},#{org.rootId},#{org.accountNumber})"
             + "        </foreach> </script> ")
+    @Options(useGeneratedKeys = true, keyProperty = "org.id", keyColumn = "id")
     int insertAll(Map<String, Object> parm);
 
     @Delete("<script> delete from sys_organization where id in "
@@ -154,5 +156,8 @@ public interface OrgMapper {
 
     @Select("select id,t_number as tNumber from sys_organization where name=#{name}")
     Map<String,Object> selectOrgByName(@Param("name") Object name);
+
+
+    int addProject();
 
 }

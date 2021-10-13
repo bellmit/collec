@@ -1,6 +1,13 @@
 package com.unicom.roleRightShiro.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import com.unicom.common.IConstants;
+import com.unicom.common.validator.ValidatorUtils;
+import com.unicom.common.validator.group.AddGroup;
+import com.unicom.project.entity.UserProjectEntity;
+import com.unicom.project.entity.enums.ProjectSourceTypeEnum;
+import com.unicom.project.entity.enums.ProjectStatusEnum;
+import com.unicom.project.service.UserProjectService;
 import com.unicom.roleRightShiro.mapper.OrgMapper;
 import com.unicom.roleRightShiro.service.OrgService;
 import com.unicom.roleRightShiro.utils.RightContants;
@@ -13,10 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -29,6 +33,11 @@ import java.util.stream.Collectors;
 public class OrgServiceImpl implements OrgService {
 	@Autowired
 	private OrgMapper orgMapper;
+
+	@Autowired
+	private  UserProjectService projectService;
+
+
 
 	public Map<String, Object> list() {
 		@SuppressWarnings("unchecked")
@@ -128,7 +137,21 @@ public class OrgServiceImpl implements OrgService {
 
 		}
 		try {
-			this.orgMapper.insertAll(parm);
+			this.orgMapper.insert(coldata.iterator().next());
+
+			//如果是一级组织，根据组织id插入表单
+			for(Map<String,Object> dataw:coldata){
+				if(dataw.get("parentId")==null) {
+					UserProjectEntity project=new UserProjectEntity();
+					project.setKey(IdUtil.fastSimpleUUID());
+					project.setName(dataw.get("name")+" 采集表单");
+					//project.setDescribe("用于采集"+dataw.get("name")+"的信息");
+					project.setOrgId(Long.parseLong(dataw.get("id")+""));
+					project.setStatus(ProjectStatusEnum.CREATE);
+					project.setSourceType(ProjectSourceTypeEnum.BLANK);
+					projectService.save(project);
+				}
+			}
 		}catch (Exception e){
 			if(e instanceof SQLIntegrityConstraintViolationException ||e instanceof DuplicateKeyException){
 				return ResponseUtils.responseError("组织机构名称重复，无法添加！");

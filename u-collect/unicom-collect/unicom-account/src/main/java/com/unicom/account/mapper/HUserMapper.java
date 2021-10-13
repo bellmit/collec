@@ -29,6 +29,7 @@ public interface HUserMapper {
     @Results({//
             @Result(property = "idNumber", column = "id_number", typeHandler = EncryptTypeHandler.class),//
             @Result(property = "tel", column = "tel", typeHandler = EncryptTypeHandler.class),//
+            @Result(property = "remark", column = "remark", typeHandler = EncryptTypeHandler.class),//
     })
     public List<Map<String,Object>> list(Map<String,Object> parm);
 

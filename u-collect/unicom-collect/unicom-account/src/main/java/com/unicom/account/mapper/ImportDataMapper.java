@@ -11,7 +11,7 @@ public interface ImportDataMapper {
     @Insert("insert into h_import_logs (id,org_id,file_name,file_type,data_type,import_result,import_count,storeFilePath,userId)"
             + "values(#{id},#{orgId},#{fileName},#{fileType},#{dataType},#{importResult},#{importCount},#{storeFilePath},#{userId})"
             + " ON DUPLICATE KEY UPDATE import_result=values(import_result),import_count=values(import_count)")
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+
     int insertLog(Map<String, Object> parm);
 
 
@@ -54,7 +54,7 @@ public interface ImportDataMapper {
             + "INSERT INTO h_user(name,id_number,tel,org_Id,root_org_id,org_name,password,create_user_id,remark) "
             + "values "
             + " <foreach collection='coll' item='pro' index='index' separator=','> "
-            + "(#{pro.name},#{pro.idNumber,jdbcType=VARCHAR,typeHandler=com.unicom.health.handler.EncryptTypeHandler},#{pro.tel,typeHandler=com.unicom.health.handler.EncryptTypeHandler},#{pro.orgId},#{pro.rootOrgId},#{pro.orgName},#{pro.password,typeHandler=com.unicom.health.handler.AESTypeHandler},#{pro.logId},#{pro.remark})"
+            + "(#{pro.name},#{pro.idNumber,jdbcType=VARCHAR,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{pro.tel,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{pro.orgId},#{pro.rootOrgId},#{pro.orgName},#{pro.password,typeHandler=com.unicom.health.handler.AESTypeHandler},#{pro.logId},#{pro.remark,jdbcType=VARCHAR,typeHandler=com.unicom.account.handler.EncryptTypeHandler})"
             + "</foreach>"
             + " ON DUPLICATE KEY UPDATE "
             + " tel=values(tel),"
@@ -65,6 +65,7 @@ public interface ImportDataMapper {
             + " org_Name=values(org_Name),"
             + " create_user_id=values(create_user_id)"
             + " </script>")
+
     int insertTel(@Param(value = "coll") Collection<Map<String, Object>> coll);
 
 
