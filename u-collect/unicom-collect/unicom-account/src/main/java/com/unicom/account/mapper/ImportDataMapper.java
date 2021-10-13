@@ -54,7 +54,7 @@ public interface ImportDataMapper {
             + "INSERT INTO h_user(name,id_number,tel,org_Id,root_org_id,org_name,password,create_user_id,remark) "
             + "values "
             + " <foreach collection='coll' item='pro' index='index' separator=','> "
-            + "(#{pro.name},#{pro.idNumber,jdbcType=VARCHAR,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{pro.tel,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{pro.orgId},#{pro.rootOrgId},#{pro.orgName},#{pro.password,typeHandler=com.unicom.health.handler.AESTypeHandler},#{pro.logId},#{pro.remark,jdbcType=VARCHAR,typeHandler=com.unicom.account.handler.EncryptTypeHandler})"
+            + "(#{pro.name},#{pro.idNumber,jdbcType=VARCHAR,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{pro.tel,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{pro.orgId},#{pro.rootOrgId},#{pro.orgName},#{pro.password,typeHandler=com.unicom.account.handler.AESTypeHandler},#{pro.logId},#{pro.remark,jdbcType=VARCHAR,typeHandler=com.unicom.account.handler.EncryptTypeHandler})"
             + "</foreach>"
             + " ON DUPLICATE KEY UPDATE "
             + " tel=values(tel),"
