@@ -11,7 +11,6 @@ public interface ImportDataMapper {
     @Insert("insert into h_import_logs (id,org_id,file_name,file_type,data_type,import_result,import_count,storeFilePath,userId)"
             + "values(#{id},#{orgId},#{fileName},#{fileType},#{dataType},#{importResult},#{importCount},#{storeFilePath},#{userId})"
             + " ON DUPLICATE KEY UPDATE import_result=values(import_result),import_count=values(import_count)")
-
     int insertLog(Map<String, Object> parm);
 
 
@@ -65,7 +64,6 @@ public interface ImportDataMapper {
             + " org_Name=values(org_Name),"
             + " create_user_id=values(create_user_id)"
             + " </script>")
-
     int insertTel(@Param(value = "coll") Collection<Map<String, Object>> coll);
 
 
