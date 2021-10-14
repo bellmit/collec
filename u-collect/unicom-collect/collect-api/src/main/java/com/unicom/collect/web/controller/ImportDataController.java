@@ -131,8 +131,6 @@ public class ImportDataController {
 			annotationsMap.put(3,"请下拉选择或填写正确的组织机构名称。机构名称有误时将无法导入数据。");
 			HashMap<Integer, String[]> dropDownMap = new HashMap<>();
 
-
-
 			TitleColorSheetWriteHandler titleHandler = new TitleColorSheetWriteHandler(columns, IndexedColors.GREEN.index,annotationsMap,dropDownMap);
 			CustomSheetWriteHandler cus=new CustomSheetWriteHandler();
 			cus.setOrgs(orgs);

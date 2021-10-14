@@ -40,6 +40,14 @@ public class UserProjectResultEntity extends BaseEntity<UserProjectResultEntity>
 
     private Long serialNumber;
 
+    private Long hUserId;
+
+    private String name;
+
+
+    private Long orgId;
+
+
     /**
      * 填写结果原始数据
      */

@@ -11,7 +11,7 @@ public interface HUserMapper {
 
     @Select("<script>" +
             "select " +
-            " id,name,id_number,tel,org_Id as orgId, org_name as orgName,remark" +
+            " id,name,id_number,tel,org_Id as orgId, org_name as orgName,remark,if(id_number=remark,1,0) as  isHead" +
             " from " +
             " h_user " +
             " where 1=1 " +

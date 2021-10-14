@@ -31,28 +31,26 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//        Login annotation;
-//        Map<String, Object> user = (Map<String, Object>) SecurityUtils.getSubject().getSession().getAttribute(IConstants.SESSION_USER_INFO);
-//        if (handler instanceof HandlerMethod) {
-//            annotation = ((HandlerMethod) handler).getMethodAnnotation(Login.class);
-//        } else {
-//            return true;
-//        }
-//
-//        if (annotation == null) {
-//            return true;
-//        }
-//
-//
-//
-//        //凭证为空
-//        if (user==null) {
-//            throw new AuthorizationException( "用户不能为空");
-//        }
-//
-//
-//        //设置userId到request里，后续根据userId，获取用户信息
-//        request.setAttribute(USER_KEY, Long.parseLong(user.get("userId").toString()));
+        Login annotation;
+        Map<String, Object> user = (Map<String, Object>) SecurityUtils.getSubject().getSession().getAttribute(IConstants.SESSION_USER_INFO);
+        if (handler instanceof HandlerMethod) {
+            annotation = ((HandlerMethod) handler).getMethodAnnotation(Login.class);
+        } else {
+            return true;
+        }
+
+        if (annotation == null) {
+            return true;
+        }
+
+        //凭证为空
+        if (user==null) {
+            throw new AuthorizationException( "用户不能为空");
+        }
+
+
+        //设置userId到request里，后续根据userId，获取用户信息
+        request.setAttribute(USER_KEY, Long.parseLong(user.get("userId").toString()));
 
         return true;
     }

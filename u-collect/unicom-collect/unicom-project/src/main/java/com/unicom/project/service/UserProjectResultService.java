@@ -32,6 +32,8 @@ public interface UserProjectResultService extends IService<UserProjectResultEnti
     Page listByQueryConditions(QueryProjectResultRequest request);
 
 
+    Object listByQueryConditions2(QueryProjectResultRequest request);
+
     /**
      * 导出excel
      *

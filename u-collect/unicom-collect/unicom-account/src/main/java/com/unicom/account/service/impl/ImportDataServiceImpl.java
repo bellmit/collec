@@ -7,6 +7,8 @@ import com.unicom.account.mapper.HUserMapper;
 import com.unicom.account.mapper.ImportDataMapper;
 import com.unicom.account.service.ImportDataService;
 import com.unicom.account.util.IDCardUtil;
+import com.unicom.project.entity.UserProjectResultEntity;
+import com.unicom.project.service.UserProjectResultService;
 import com.unicom.roleRightShiro.config.FileConfig;
 import com.unicom.roleRightShiro.mapper.OrgMapper;
 import com.unicom.utils.PageUtils;
@@ -48,6 +50,9 @@ public class ImportDataServiceImpl implements ImportDataService {
     @Autowired
     private FileConfig fileConfig;
 
+    @Autowired
+    private  UserProjectResultService projectResultService;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Map<String, Object> importData(MultipartFile file, Map<String, Object> parm, int type) {
@@ -85,8 +90,20 @@ public class ImportDataServiceImpl implements ImportDataService {
         }
         Object savePoint = TransactionAspectSupport.currentTransactionStatus().createSavepoint();
         i = this.importDataMapper.insertTel(batch);
+
+
+        //根据rootOrgId获取projectKey
+        String key=this.importDataMapper.getProjectKey(tuple._2());
+        if(key==null){
+            TransactionAspectSupport.currentTransactionStatus().rollbackToSavepoint(savePoint);
+            return ResponseUtils.responseError("导入错误，村采集表单创建错误，请先检查采集表单！");
+        }
         for(Map<String,Object> k:batch){
-            System.out.println("cccc---"+k.get("id"));
+            UserProjectResultEntity ur=new UserProjectResultEntity();
+            ur.setHUserId(Long.parseLong(k.get("id")+"")); //设置用户id
+            ur.setOrgId(Long.parseLong(k.get("orgId")+""));
+            ur.setProjectKey(key);
+            projectResultService.saveProjectResult(ur);
         }
         int count = this.hUserMapper.countOrg(tuple._2());
         if (count > tuple._3()) {

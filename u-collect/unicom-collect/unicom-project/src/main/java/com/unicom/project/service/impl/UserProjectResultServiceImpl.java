@@ -7,10 +7,12 @@ import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.*;
 import cn.hutool.http.HttpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Sets;
+import com.unicom.common.IConstants;
 import com.unicom.common.constant.CommonConstants;
 import com.unicom.common.entity.BaseEntity;
 import com.unicom.common.exception.BaseException;
@@ -31,6 +33,7 @@ import com.unicom.storage.cloud.OssStorageFactory;
 import com.unicom.storage.util.StorageUtils;
 import com.unicom.project.constant.ProjectRedisKeyConstants;
 import lombok.RequiredArgsConstructor;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.stereotype.Service;
 
@@ -64,9 +67,11 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
         String projectKey = entity.getProjectKey();
         entity.setSerialNumber(redisUtils.incr(StrUtil.format(ProjectRedisKeyConstants.PROJECT_RESULT_NUMBER, projectKey), CommonConstants.ConstantNumber.ONE));
         entity.setSubmitAddress(AddressUtils.getRealAddressByIP(entity.getSubmitRequestIp()));
-        this.save(entity);
-
+        this.saveOrUpdate(entity);
     }
+
+
+
 
     @Override
     public Page listByQueryConditions(QueryProjectResultRequest request) {
@@ -86,7 +91,36 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
                 lambdaQueryWrapper.apply(StrUtil.format("original_data ->'$.{}' {} {} ", item, queryComparison.getKey(), value));
             });
         }
+        //IPage<Map<String, Object>> p= this.getBaseMapper().pageProject(request.toMybatisPage(),lambdaQueryWrapper);
+
         return this.page(request.toMybatisPage(), lambdaQueryWrapper);
+    }
+
+
+    @Override
+    public Object listByQueryConditions2(QueryProjectResultRequest request) {
+        Map<String, Object> user = (Map<String, Object>) SecurityUtils.getSubject().getSession().getAttribute(IConstants.SESSION_USER_INFO);
+        if(user==null)
+            user=new HashMap<>();
+        LambdaQueryWrapper<UserProjectResultEntity> lambdaQueryWrapper = Wrappers.<UserProjectResultEntity>lambdaQuery()
+                .eq(UserProjectResultEntity::getProjectKey, request.getProjectKey())
+                .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getCreateTime, request.getEndDateTime())
+                .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getCreateTime, request.getBeginDateTime())
+                .orderByDesc(BaseEntity::getCreateTime);
+        if (ObjectUtil.isNotNull(request.getExtParamsMap())) {
+            request.getExtParamsMap().keySet().forEach(item -> {
+                String comparison = MapUtil.getStr(request.getExtComparisonsMap(), item);
+                QueryProjectResultRequest.QueryComparison queryComparison = QueryProjectResultRequest.QueryComparison.get(comparison);
+                Object value = request.getExtParamsMap().get(item);
+                if (queryComparison == QueryProjectResultRequest.QueryComparison.LIKE) {
+                    value = "'%" + value + "%'";
+                }
+                lambdaQueryWrapper.apply(StrUtil.format("original_data ->'$.{}' {} {} ", item, queryComparison.getKey(), value));
+            });
+        }
+        IPage<Map<String, Object>> p= this.getBaseMapper().pageProject(request.toMybatisPage(),lambdaQueryWrapper,user.get("orgId"));
+
+        return p;
     }
 
     @Override

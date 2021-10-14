@@ -89,6 +89,34 @@ public class UserProjectResultController {
             return Result.failed(userProjectSettingStatus.getMsg());
         }
         projectResultService.saveProjectResult(entity);
+
+        ThreadUtil.execAsync(() -> {
+            UserProjectSettingEntity settingEntity = userProjectSettingStatus.isDataNull() ? null : userProjectSettingStatus.getData();
+            this.sendWriteResultNotify(settingEntity, entity);
+        });
+        return Result.success();
+    }
+
+
+
+    /**
+     * 填写
+     *
+     * @param entity
+     * @param request
+     * @return
+     */
+    @NoRepeatSubmit
+    @PostMapping("/update")
+    public Result updateProjectResult(@RequestBody UserProjectResultEntity entity, HttpServletRequest request) {
+        ValidatorUtils.validateEntity(entity);
+        entity.setSubmitRequestIp(HttpUtils.getIpAddr(request));
+        Result<UserProjectSettingEntity> userProjectSettingStatus = userProjectSettingService.getUserProjectSettingStatus(entity.getProjectKey(), entity.getSubmitRequestIp(), entity.getWxOpenId());
+        if (StrUtil.isNotBlank(userProjectSettingStatus.getMsg())) {
+            return Result.failed(userProjectSettingStatus.getMsg());
+        }
+        projectResultService.saveProjectResult(entity);
+
         ThreadUtil.execAsync(() -> {
             UserProjectSettingEntity settingEntity = userProjectSettingStatus.isDataNull() ? null : userProjectSettingStatus.getData();
             this.sendWriteResultNotify(settingEntity, entity);
@@ -151,7 +179,8 @@ public class UserProjectResultController {
     @Login
     @GetMapping("/page")
     public Result queryProjectResults(QueryProjectResultRequest request) {
-        return Result.success(projectResultService.listByQueryConditions(request));
+       // return Result.success(projectResultService.listByQueryConditions(request));
+        return Result.success(projectResultService.listByQueryConditions2(request));
     }
 
 
@@ -167,7 +196,7 @@ public class UserProjectResultController {
         if (!settingEntity.getPublicResult()) {
             return Result.success();
         }
-        return Result.success(projectResultService.listByQueryConditions(request));
+        return Result.success(projectResultService.listByQueryConditions2(request));
     }
 
     private void sendWriteResultNotify(UserProjectSettingEntity settingEntity, UserProjectResultEntity entity) {

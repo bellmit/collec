@@ -64,6 +64,7 @@ public interface ImportDataMapper {
             + " org_Name=values(org_Name),"
             + " create_user_id=values(create_user_id)"
             + " </script>")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int insertTel(@Param(value = "coll") Collection<Map<String, Object>> coll);
 
 
@@ -88,6 +89,12 @@ public interface ImportDataMapper {
 
     @Select("select count(1) from h_import_logs")
     int countLogs();
+
+    @Select("select `key` from pr_user_project where org_id=#{orgId}")
+    public String getProjectKey(@Param(value = "orgId") String  orgId);
+
+
+
 
 
 }
