@@ -15,9 +15,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 滑动验证码校验
- * @create : 2020-12-14 15:51
+ * @create : 2021-10-14 15:51
  **/
 public class ValidateCodeFilter implements Filter {
 

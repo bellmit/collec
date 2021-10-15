@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author smalljop
+ * @author yangpeng
  */
 public class CaptchaCacheServiceProvider implements CaptchaCacheService {
 

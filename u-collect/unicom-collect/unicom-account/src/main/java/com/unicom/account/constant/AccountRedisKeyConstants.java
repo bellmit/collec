@@ -2,8 +2,8 @@ package com.unicom.account.constant;
 
 /**
  * @description: redis key常量
- * @author: smalljop
- * @create: 2020-02-12 22:34
+ * @author: yangpeng
+ * @create: 2021-10-12 22:34
  **/
 public interface AccountRedisKeyConstants {
     /**

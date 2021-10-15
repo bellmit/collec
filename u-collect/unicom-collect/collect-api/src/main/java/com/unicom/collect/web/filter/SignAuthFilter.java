@@ -21,8 +21,8 @@ import java.util.SortedMap;
 
 /**
  * @description: 签名认证接口
- * @author: smalljop
- * @create: 2019-12-09 13:51
+ * @author: yangpeng
+ * @create: 2021-10-09 13:51
  **/
 @Slf4j
 @Data

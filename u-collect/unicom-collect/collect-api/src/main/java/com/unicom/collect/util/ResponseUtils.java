@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 
 /**
- * @author smalljop
+ * @author yangpeng
  */
 @Slf4j
 public class ResponseUtils {

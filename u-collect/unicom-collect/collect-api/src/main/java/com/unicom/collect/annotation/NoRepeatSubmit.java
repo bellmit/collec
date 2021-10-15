@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 /**
  * 不允许重复提交注解
  *
- * @author smalljop
+ * @author yangpeng
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

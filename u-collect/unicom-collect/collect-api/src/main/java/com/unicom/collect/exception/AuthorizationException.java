@@ -3,7 +3,7 @@ package com.unicom.collect.exception;
 import com.unicom.common.exception.BaseException;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 授权异常
  * @create : 2020-11-27 14:37
  **/

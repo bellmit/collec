@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * 第三方用户授权信息(AcUserAuthorize)表实体类
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-12-09 17:43:04
  */
 

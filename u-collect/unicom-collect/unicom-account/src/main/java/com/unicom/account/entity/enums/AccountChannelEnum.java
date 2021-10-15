@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 账号注册登录渠道
  * @create : 2020-11-19 10:51
  **/

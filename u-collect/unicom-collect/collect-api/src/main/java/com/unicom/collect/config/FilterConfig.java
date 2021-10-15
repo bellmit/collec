@@ -15,7 +15,7 @@ import org.springframework.web.filter.CorsFilter;
 import javax.servlet.DispatcherType;
 
 /**
- * @author smalljop
+ * @author yangpeng
  * @description 过滤器配置
  * @create 2019-01-29 16:27
  **/

@@ -15,7 +15,7 @@ import java.util.*;
 /**
  * http 工具类 获取请求中的参数
  *
- * @author show
+ * @author yangpeng
  * @date 14:23 2019/5/29
  */
 public class HttpUtils {

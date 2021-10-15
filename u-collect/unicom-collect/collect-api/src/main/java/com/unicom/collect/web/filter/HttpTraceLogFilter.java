@@ -33,7 +33,7 @@ import java.util.Objects;
 /**
  * 请求链路日志过滤器
  *
- * @author smalljop
+ * @author yangpeng
  */
 @Slf4j
 public class HttpTraceLogFilter extends OncePerRequestFilter implements Ordered {
