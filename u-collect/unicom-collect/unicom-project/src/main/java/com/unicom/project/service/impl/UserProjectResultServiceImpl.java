@@ -103,7 +103,7 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
         if(user==null)
             user=new HashMap<>();
         LambdaQueryWrapper<UserProjectResultEntity> lambdaQueryWrapper = Wrappers.<UserProjectResultEntity>lambdaQuery()
-                .eq(UserProjectResultEntity::getProjectKey, request.getProjectKey())
+                .eq(ObjectUtil.isNotNull(request.getProjectKey()),UserProjectResultEntity::getProjectKey, request.getProjectKey())
                 .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getCreateTime, request.getEndDateTime())
                 .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getCreateTime, request.getBeginDateTime())
                 .orderByDesc(BaseEntity::getCreateTime);
@@ -118,7 +118,7 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
                 lambdaQueryWrapper.apply(StrUtil.format("original_data ->'$.{}' {} {} ", item, queryComparison.getKey(), value));
             });
         }
-        IPage<Map<String, Object>> p= this.getBaseMapper().pageProject(request.toMybatisPage(),lambdaQueryWrapper,user.get("orgId"));
+        IPage<Map<String, Object>> p= this.getBaseMapper().pageProject(request.toMybatisPage(),lambdaQueryWrapper,user.get("rootId"));
 
         return p;
     }
