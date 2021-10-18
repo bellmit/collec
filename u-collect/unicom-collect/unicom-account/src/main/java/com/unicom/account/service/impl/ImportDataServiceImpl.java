@@ -89,7 +89,13 @@ public class ImportDataServiceImpl implements ImportDataService {
             return ResponseUtils.responseError(tuple._2);
         }
         Object savePoint = TransactionAspectSupport.currentTransactionStatus().createSavepoint();
-        i = this.importDataMapper.insertTel(batch);
+        // i = this.importDataMapper.insertTel(batch);
+
+        for(Map<String,Object> p:batch){
+            //p.put("password","123456");
+            i=i+this.importDataMapper.insertTel2(p);
+            System.out.println(p.get("id"));
+        }
 
 
         //根据rootOrgId获取projectKey
@@ -100,6 +106,9 @@ public class ImportDataServiceImpl implements ImportDataService {
         }
         for(Map<String,Object> k:batch){
             UserProjectResultEntity ur=new UserProjectResultEntity();
+            if(k.get("id")==null){
+                continue;
+            }
             ur.setHUserId(Long.parseLong(k.get("id")+"")); //设置用户id
             ur.setOrgId(Long.parseLong(k.get("orgId")+""));
             ur.setProjectKey(key);

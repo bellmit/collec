@@ -50,10 +50,10 @@ public interface ImportDataMapper {
 
 
     @Insert("<script>"
-            + "INSERT INTO h_user(name,id_number,tel,org_Id,root_org_id,org_name,password,create_user_id,remark) "
+            + "INSERT INTO h_user(id,name,id_number,tel,org_Id,root_org_id,org_name,password,create_user_id,remark) "
             + "values "
-            + " <foreach collection='coll' item='pro' index='index' separator=','> "
-            + "(#{pro.name},#{pro.idNumber,jdbcType=VARCHAR,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{pro.tel,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{pro.orgId},#{pro.rootOrgId},#{pro.orgName},#{pro.password,typeHandler=com.unicom.account.handler.AESTypeHandler},#{pro.logId},#{pro.remark,jdbcType=VARCHAR,typeHandler=com.unicom.account.handler.EncryptTypeHandler})"
+            + " <foreach collection='list' item='pro' index='index' separator=','> "
+            + "(#{pro.id},#{pro.name},#{pro.idNumber,jdbcType=VARCHAR,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{pro.tel,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{pro.orgId},#{pro.rootOrgId},#{pro.orgName},#{pro.password,typeHandler=com.unicom.account.handler.AESTypeHandler},#{pro.logId},#{pro.remark,jdbcType=VARCHAR,typeHandler=com.unicom.account.handler.EncryptTypeHandler})"
             + "</foreach>"
             + " ON DUPLICATE KEY UPDATE "
             + " tel=values(tel),"
@@ -64,8 +64,26 @@ public interface ImportDataMapper {
             + " org_Name=values(org_Name),"
             + " create_user_id=values(create_user_id)"
             + " </script>")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insertTel(@Param("list") Collection<Map<String, Object>> list);
+
+
+
+    @Insert(
+             "INSERT INTO h_user(id,name,id_number,tel,org_Id,root_org_id,org_name,password,create_user_id,remark) "
+            + "values "
+            + "(null,#{name},#{idNumber,jdbcType=VARCHAR,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{tel,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{orgId},#{rootOrgId},#{orgName},#{password},#{logId},#{remark,jdbcType=VARCHAR,typeHandler=com.unicom.account.handler.EncryptTypeHandler})"
+            + " ON DUPLICATE KEY UPDATE "
+            + " tel=values(tel),"
+            + " name=values(name),"
+            + " org_Id=values(org_Id),"
+            + " remark=values(remark),"
+            + " root_org_id=values(root_org_id),"
+            + " org_Name=values(org_Name),"
+            + " create_user_id=values(create_user_id)"
+            )
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    int insertTel(@Param(value = "coll") Collection<Map<String, Object>> coll);
+    int insertTel2(Map<String,Object> parm);
 
 
     @Update("update h_import_logs set import_result=#{importResult},import_count=#{importCount} where id=#{id}")
