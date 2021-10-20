@@ -46,6 +46,20 @@ public class HUserController {
         return hUserService.update(params);
     }
 
+
+
+    @RequiresPermissions(value = {"staffs:add"})
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json")
+    public Map<String, Object> add(@RequestBody Map<String, Object> params) {
+        Tuple2<Boolean,String> validate=this.validate(params);
+        if(!validate._1)
+            return  ResponseUtils.responseError(validate._2);
+
+
+        return hUserService.update(params);
+    }
+
+
     @RequiresPermissions(value = {"staffs:delete"})
     @RequestMapping(value = "/delete", method = RequestMethod.GET, produces = "application/json")
     public Map<String, Object> delete(@RequestParam Map<String, Object> params) {

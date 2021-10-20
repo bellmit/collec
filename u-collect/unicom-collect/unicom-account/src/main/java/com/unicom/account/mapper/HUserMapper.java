@@ -44,6 +44,10 @@ public interface HUserMapper {
             " where id=#{id} ")
     public int update(Map<String,Object> huser);
 
+    @Insert("insert into h_user(tel,name,id_number,org_id,org_name,remark) values(#{tel,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{name},#{idNumber,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{orgId}," +
+            "(select name from sys_organization where id=#{orgId}),#{remark})")
+    public int insert(Map<String,Object> huser);
+
     /**
      * 删除用户信息
      * @param huser

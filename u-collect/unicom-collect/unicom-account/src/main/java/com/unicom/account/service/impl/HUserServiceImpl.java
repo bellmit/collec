@@ -46,6 +46,18 @@ public class HUserServiceImpl implements HUserService {
         return ResponseUtils.responseSuccess();
     }
 
+    public Map<String,Object> add(Map<String,Object> parm){
+        //解码
+        this.enCode(parm,"idNumber");
+        this.enCode(parm,"tel");
+
+        //如果
+        Map<String,Object> userIds=new HashMap<>();
+        userIds.put("userIds",parm.get("id"));
+        this.hUserMapper.insert(parm);
+        return ResponseUtils.responseSuccess();
+    }
+
     @Override
     public Map<String, Object> delete(Map<String, Object> parm) {
         Map<String,Object> idNumbers=new HashMap<>();
