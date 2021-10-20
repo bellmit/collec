@@ -11,6 +11,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Sets;
 import com.unicom.common.IConstants;
 import com.unicom.common.constant.CommonConstants;
@@ -125,10 +127,15 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
 
     @Override
     public ExportProjectResultVO exportProjectResult(QueryProjectResultRequest request) {
+        Map<String, Object> user = (Map<String, Object>) SecurityUtils.getSubject().getSession().getAttribute(IConstants.SESSION_USER_INFO);
+        if(user==null)
+            user=new HashMap<>();
         //问题列表
         String projectKey = request.getProjectKey();
         List<UserProjectItemEntity> userProjectItemEntityList = userProjectItemService.listByProjectKey(projectKey);
         // excel 标题列
+
+
         List<ExportProjectResultVO.ExcelHeader> titleList = userProjectItemEntityList.stream()
                 .map(item -> new ExportProjectResultVO.ExcelHeader(item.getFormItemId().toString(), item.getLabel()))
                 .collect(Collectors.toList());
@@ -138,11 +145,26 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
                 .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getCreateTime, request.getEndDateTime())
                 .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getCreateTime, request.getBeginDateTime())
                 .orderByDesc(BaseEntity::getCreateTime));
+
+        Collection<Map<String,Object>> resulet=this.getBaseMapper().list(Wrappers.<UserProjectResultEntity>lambdaQuery()
+                .eq(UserProjectResultEntity::getProjectKey, request.getProjectKey())
+                .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getCreateTime, request.getEndDateTime())
+                .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getCreateTime, request.getBeginDateTime())
+                .orderByDesc(BaseEntity::getCreateTime),user.get("rootId"));
         if (CollectionUtil.isEmpty(resultEntityList)) {
             throw new BaseException("此表单无有效反馈，不能导出");
         }
-        List<Map<String, Object>> resultList = resultEntityList.stream().map(item -> {
-            Map<String, Object> processData = item.getProcessData();
+        ObjectMapper mapper = new ObjectMapper();
+        List<Map<String, Object>> resultList = resulet.stream().map(item -> {
+            Map<String, Object> processData = null;
+            try {
+                if(item.get("processData")!=null)
+                    processData = mapper.readValue( (String)item.get("processData"), Map.class);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+            if(processData==null)
+                processData=new HashMap<>();
             Iterator<String> iterator = processData.keySet().iterator();
             while (iterator.hasNext()) {
                 String key = iterator.next();
@@ -152,13 +174,35 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
                 }
             }
 
-            processData.put(BaseEntity.Fields.createTime, item.getCreateTime());
-            processData.put(UserProjectResultEntity.Fields.submitAddress, item.getSubmitAddress());
+            processData.put(BaseEntity.Fields.createTime, item.get("createTime"));
+            processData.put(UserProjectResultEntity.Fields.submitAddress, item.get("submitAddress"));
+            processData.put("idNumber",item.get("idNumber"));
+            processData.put("name",item.get("name"));
+            processData.put("orgName",item.get("orgName"));
             return processData;
         }).collect(Collectors.toList());
         List<ExportProjectResultVO.ExcelHeader> allHeaderList = new ArrayList<>();
+        ExportProjectResultVO.ExcelHeader head2=new ExportProjectResultVO.ExcelHeader();
+        head2.setFieldKey("name");
+        head2.setTitle("姓名");
+
+        ExportProjectResultVO.ExcelHeader head1=new ExportProjectResultVO.ExcelHeader();
+        head1.setFieldKey("idNumber");
+        head1.setTitle("身份证号码");
+
+
+
+
+        ExportProjectResultVO.ExcelHeader head3=new ExportProjectResultVO.ExcelHeader();
+        head3.setFieldKey("orgName");
+        head3.setTitle("所属机构");
+        allHeaderList.add(head2);
+        allHeaderList.add(head1);
+        allHeaderList.add(head3);
         allHeaderList.addAll(ExportProjectResultVO.DEFAULT_HEADER_NAME);
         allHeaderList.addAll(titleList);
+
+
         return new ExportProjectResultVO(allHeaderList, resultList);
     }
 

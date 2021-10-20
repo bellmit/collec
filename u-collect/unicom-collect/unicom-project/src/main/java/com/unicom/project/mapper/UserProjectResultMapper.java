@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -48,6 +49,36 @@ public interface UserProjectResultMapper extends BaseMapper<UserProjectResultEnt
             @Result(property = "remark", column = "remark", typeHandler = EncryptTypeHandler.class),//
     })
     public IPage<Map<String,Object>> pageProject(IPage<Map<String,Object>>  page, @Param(Constants.WRAPPER) Wrapper queryWrapper,@Param("orgId") Object OrgId);
+
+
+
+    @Select("<script> " +
+            "select * from (" +
+            "select a.name,a.id_number ,a.tel,a.remark,o.name as orgName,b.project_key as projectKey,b.serial_number as serialNumber,b.process_data as processData,b.submit_ua as submitUa,b.submit_os as submitOs," +
+            " b.submit_browser as submitBrowser,b.submit_request_ip as submitRequestIp,b.submit_address as submitAddress,b.complete_time as completeTime,b.wx_open_id as wxOpenId,b.wx_user_info as wxUserInfo,b.create_time as createTime," +
+            " b.update_time as updateTime,  " +
+            " b.*"+
+            " from h_user  a left join sys_organization  o on a.org_id=o.id " +
+            "<if  test=\"orgId !='' and orgId !=null\">   " +
+            " and  a.org_id  in(" +
+            "  WITH RECURSIVE td AS (\r" +
+            "    SELECT id FROM sys_organization   where id=#{orgId} " +
+            "    UNION  " +
+            "    SELECT c.id FROM sys_organization c ,td WHERE c.parentId = td.id " +
+            " ) SELECT * FROM td ORDER BY td.id )  "+
+            "  </if>" +
+            " left join pr_user_project_result b  on a.id=b.h_user_id ) k" +
+
+            "  ${ew.customSqlSegment}" +
+            "</script>"
+
+    )
+    @Results({//
+            @Result(property = "idNumber", column = "id_number", typeHandler = EncryptTypeHandler.class),//
+            @Result(property = "tel", column = "tel", typeHandler = EncryptTypeHandler.class),//
+            @Result(property = "remark", column = "remark", typeHandler = EncryptTypeHandler.class),//
+    })
+    public Collection<Map<String,Object>> list( @Param(Constants.WRAPPER) Wrapper queryWrapper, @Param("orgId") Object OrgId);
 
 
 }
