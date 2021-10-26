@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.NotBlank;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 微信网页开发
- * @create : 2020-12-02 13:40
+ * @create : 2021-10-02 13:40
  **/
 @AllArgsConstructor
 @RestController

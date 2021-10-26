@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 /**
  * 项目表(ProjectTemplate)表实体类
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2021-01-06 10:42:45
  */
 

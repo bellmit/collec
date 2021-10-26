@@ -6,7 +6,7 @@ import com.unicom.account.entity.UserAuthorizeEntity;
 /**
  * 第三方用户授权信息(AcUserAuthorize)表数据库访问层
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-12-09 17:43:15
  */
 public interface UserAuthorizeMapper extends BaseMapper<UserAuthorizeEntity> {

@@ -1,9 +1,9 @@
 package com.unicom.project.constant;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description :
- * @create : 2020-11-11 18:16
+ * @create : 2021-10-11 18:16
  **/
 public interface ProjectConstants {
 

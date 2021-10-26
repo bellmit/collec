@@ -191,7 +191,7 @@ public class UserProjectController {
                         .like(StrUtil.isNotBlank(request.getName()), UserProjectEntity::getName, request.getName())
                         .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectEntity::getUpdateTime, request.getEndDateTime())
                         .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectEntity::getUpdateTime, request.getBeginDateTime())
-                        .orderByDesc(BaseEntity::getCreateTime),user.get("orgId")));
+                        .orderByDesc(BaseEntity::getCreateTime),user.get("rootId")));
     }
 
 

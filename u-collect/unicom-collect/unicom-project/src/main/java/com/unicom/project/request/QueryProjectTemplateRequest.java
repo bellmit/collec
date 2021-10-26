@@ -4,9 +4,9 @@ import com.unicom.common.entity.PageRequest;
 import lombok.Data;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 查询项目模板
- * @create : 2020-12-10 15:04
+ * @create : 2021-10-10 15:04
  **/
 @Data
 public class QueryProjectTemplateRequest {

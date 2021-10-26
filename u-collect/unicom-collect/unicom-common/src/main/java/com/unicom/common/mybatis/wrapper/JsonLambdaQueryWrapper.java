@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : json 查询
- * @create : 2020-11-24 13:18
+ * @create : 2021-10-24 13:18
  **/
 public class JsonLambdaQueryWrapper<T> extends LambdaQueryWrapper<T> {
 

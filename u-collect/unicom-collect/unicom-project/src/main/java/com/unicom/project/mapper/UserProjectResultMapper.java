@@ -28,7 +28,7 @@ public interface UserProjectResultMapper extends BaseMapper<UserProjectResultEnt
             " b.submit_browser as submitBrowser,b.submit_request_ip as submitRequestIp,b.submit_address as submitAddress,b.complete_time as completeTime,b.wx_open_id as wxOpenId,b.wx_user_info as wxUserInfo,b.create_time as createTime," +
             " b.update_time as updateTime,  " +
             " b.*"+
-             " from h_user  a left join sys_organization  o on a.org_id=o.id " +
+             " from h_user  a inner join sys_organization  o on a.org_id=o.id " +
              "<if  test=\"orgId !='' and orgId !=null\">   " +
              " and  a.org_id  in(" +
             "  WITH RECURSIVE td AS (\r" +

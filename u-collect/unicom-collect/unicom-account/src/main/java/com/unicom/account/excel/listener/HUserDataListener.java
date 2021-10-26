@@ -8,6 +8,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * yangpeng
+ */
 @Data
 public class HUserDataListener extends AnalysisEventListener<Map<Integer, String>> {
     private Collection<Map<String, Object>> batch;

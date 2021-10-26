@@ -10,7 +10,7 @@ import com.unicom.project.vo.ExportProjectResultVO;
 /**
  * 项目表单项(ProjectResult)表服务接口
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-11-23 14:09:22
  */
 public interface UserProjectResultService extends IService<UserProjectResultEntity> {

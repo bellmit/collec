@@ -107,8 +107,8 @@ public interface OrgMapper {
             + "</script>"})
     int updateOrgTNumber(Map<String, Object> parm);
 
-    @Insert("insert into sys_organization(name,code,parentId,level,description,address,tel,province_code,city_code,county_code,province,city,county) "
-            + "values (#{name},#{code},#{parentId},#{level},#{description},#{address},#{tel},#{provinceCode},#{cityCode},#{county_code},#{province},#{city},#{county})")
+    @Insert("insert into sys_organization(name,code,parentId,level,description,address,tel,province_code,city_code,county_code,province,city,county,t_number,validity,rootId,account_number) "
+            + "values (#{name},#{code},#{parentId},#{level},#{description},#{address},#{tel},#{provinceCode},#{cityCode},#{county_code},#{province},#{city},#{county},#{tNumber},#{validity},#{rootId},#{accountNumber})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int insert(Map<String, Object> parm);
 

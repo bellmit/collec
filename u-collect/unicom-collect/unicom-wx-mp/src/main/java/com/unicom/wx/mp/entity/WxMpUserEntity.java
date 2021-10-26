@@ -9,7 +9,7 @@ import lombok.Data;
 /**
  * 微信公众号用户 (WxMpUser)表实体类
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-12-01 17:04:32
  */
 

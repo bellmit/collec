@@ -8,7 +8,7 @@ import com.unicom.account.entity.enums.UserAuthorizeTypeEnum;
 /**
  * 第三方用户授权信息(AcUserAuthorize)表服务接口
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-12-09 17:43:16
  */
 public interface UserAuthorizeService extends IService<UserAuthorizeEntity> {

@@ -3,9 +3,9 @@ package com.unicom.common.mybatis.wrapper;
 /**
  * msyql 查询包装类
  *
- * @author : smalljop
+ * @author : yangpeng
  * @description :
- * @create : 2020-11-24 11:56
+ * @create : 2021-10-24 11:56
  **/
 public class JsonWrappers {
 

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 微信公众号用户 (WxMpUser)表服务接口
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-12-01 17:04:44
  */
 public interface WxMpUserService extends IService<WxMpUserEntity> {

@@ -2,7 +2,7 @@ package com.unicom.common.constant;
 
 /**
  * @description: 通用的常亮
- * @author: smalljop
+ * @author: yangpeng
  * @create: 2018-09-27 13:25
  **/
 public interface CommonConstants {

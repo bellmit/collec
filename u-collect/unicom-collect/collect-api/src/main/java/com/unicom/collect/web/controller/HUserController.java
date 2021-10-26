@@ -56,7 +56,7 @@ public class HUserController {
             return  ResponseUtils.responseError(validate._2);
 
 
-        return hUserService.update(params);
+        return hUserService.add(params);
     }
 
 
@@ -92,6 +92,7 @@ public class HUserController {
         if(!Objects.equals(user.get("isAdmin"),Integer.parseInt("1"))){
             if(params.get("orgId")==null) {
                 params.put("orgId", user.get("orgId"));
+                params.put("rootId",user.get("rootId"));
             }else{
                 params.put("rootId",user.get("orgId"));
                 if(orgService.selectInId(params)==null)

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author : yangpeng
  * @description : 微信订阅事件处理
- * @create : 2020-12-01 18:37
+ * @create : 2021-10-01 18:37
  **/
 @Slf4j
 @Component

@@ -7,9 +7,9 @@ import com.unicom.account.request.UpdateUserRequest;
 /**
  * 账号验证码
  *
- * @author : smalljop
+ * @author : yangpeng
  * @description :
- * @create : 2020-12-15 15:45
+ * @create : 2021-10-15 15:45
  **/
 public interface UserValidateService {
 

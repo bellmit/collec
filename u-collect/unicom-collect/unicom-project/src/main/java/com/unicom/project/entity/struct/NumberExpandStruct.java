@@ -3,9 +3,9 @@ package com.unicom.project.entity.struct;
 import lombok.Data;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 数字型输入
- * @create : 2020-11-19 15:13
+ * @create : 2021-10-19 15:13
  **/
 @Data
 public class NumberExpandStruct {

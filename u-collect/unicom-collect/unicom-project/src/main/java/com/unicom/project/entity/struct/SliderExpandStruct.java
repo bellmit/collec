@@ -3,9 +3,9 @@ package com.unicom.project.entity.struct;
 import lombok.Data;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 滑块
- * @create : 2020-11-19 15:13
+ * @create : 2021-10-19 15:13
  **/
 @Data
 public class SliderExpandStruct {

@@ -10,9 +10,9 @@ import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 import org.springframework.stereotype.Component;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 订阅项目通知
- * @create : 2020-12-01 17:44
+ * @create : 2021-10-01 17:44
  **/
 @Component
 @RequiredArgsConstructor

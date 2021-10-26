@@ -3,9 +3,9 @@ package com.unicom.project.request;
 import lombok.Data;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 项目主题查询
- * @create : 2020-11-24 10:15
+ * @create : 2021-10-24 10:15
  **/
 @Data
 public class QueryProThemeRequest {

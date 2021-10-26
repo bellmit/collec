@@ -1,9 +1,9 @@
 package com.unicom.common.sms;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 短信服务
- * @create : 2020-12-15 10:30
+ * @create : 2021-10-15 10:30
  **/
 public abstract class SmsService {
 

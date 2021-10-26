@@ -8,9 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 查询项目
- * @create : 2020-12-10 15:04
+ * @create : 2021-10-10 15:04
  **/
 @Data
 public class QueryProjectRequest {

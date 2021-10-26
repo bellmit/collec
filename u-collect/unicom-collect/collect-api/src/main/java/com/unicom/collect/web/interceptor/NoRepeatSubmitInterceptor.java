@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @description: 不允许重复提交
- * @author: smalljop.o
+ * @author: yangpeng.o
  * @create: 2019-12-31 10:39
  **/
 @Component

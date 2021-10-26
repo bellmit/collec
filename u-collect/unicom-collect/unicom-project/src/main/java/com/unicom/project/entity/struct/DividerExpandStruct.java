@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * 分割线组件属性
  *
- * @author smalljop
+ * @author yangpeng
  */
 @Data
 public class DividerExpandStruct {

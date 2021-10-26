@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 /**
  * 第三方用户授权信息(AcUserAuthorize)表服务实现类
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-12-09 17:43:17
  */
 @Service("acUserAuthorizeService")

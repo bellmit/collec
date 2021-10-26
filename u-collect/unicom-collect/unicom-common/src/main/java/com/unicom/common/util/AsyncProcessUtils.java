@@ -6,7 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import lombok.AllArgsConstructor;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 异步处理进度 像导出文件等异步耗时操作
  * @create :  2021/06/08 15:35
  **/

@@ -3,7 +3,7 @@ package com.unicom.account.vo;
 import lombok.Data;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 用户详情
  * @create: 2020-12-21 10:51
  **/

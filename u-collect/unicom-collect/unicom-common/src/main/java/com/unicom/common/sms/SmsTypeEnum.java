@@ -7,7 +7,7 @@ import lombok.Getter;
 
 /**
  * @description: Oss类型
- * @author: smalljop
+ * @author: yangpeng
  * @create: 2020-02-18 23:06
  **/
 @Getter

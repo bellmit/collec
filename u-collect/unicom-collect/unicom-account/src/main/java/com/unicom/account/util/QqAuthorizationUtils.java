@@ -14,9 +14,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : qq授权登录
- * @create : 2020-12-09 14:19
+ * @create : 2021-10-09 14:19
  **/
 @ConfigurationProperties(prefix = "platform.qq.oauth")
 @Component

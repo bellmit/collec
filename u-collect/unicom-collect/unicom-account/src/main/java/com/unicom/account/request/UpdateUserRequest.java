@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * 更新用户请求
  *
- * @author smalljop
+ * @author yangpeng
  */
 @Data
 public class UpdateUserRequest {

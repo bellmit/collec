@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * 文字描述组件属性
  *
- * @author smalljop
+ * @author yangpeng
  */
 @Data
 public class DescTextExpandStruct {

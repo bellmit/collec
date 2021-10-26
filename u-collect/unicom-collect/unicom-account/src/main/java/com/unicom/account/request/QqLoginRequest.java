@@ -3,9 +3,9 @@ package com.unicom.account.request;
 import lombok.Data;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : qq登录
- * @create : 2020-12-09 18:30
+ * @create : 2021-10-09 18:30
  **/
 @Data
 public class QqLoginRequest {

@@ -40,12 +40,13 @@ public interface HUserMapper {
      * @param huser
      * @return
      */
-    @Update("update h_user set tel=#{tel,typeHandler=com.unicom.account.handler.EncryptTypeHandler},name=#{name},id_number=#{idNumber,typeHandler=com.unicom.account.handler.EncryptTypeHandler},org_id=#{orgId},org_name=(select name from sys_organization where id=#{orgId}),remark=#{remark}" +
+    @Update("update h_user set tel=#{tel,typeHandler=com.unicom.account.handler.EncryptTypeHandler},name=#{name},id_number=#{idNumber,typeHandler=com.unicom.account.handler.EncryptTypeHandler},org_id=#{orgId},org_name=(select name from sys_organization where id=#{orgId}),remark=#{remark,typeHandler=com.unicom.account.handler.EncryptTypeHandler}" +
             " where id=#{id} ")
     public int update(Map<String,Object> huser);
 
     @Insert("insert into h_user(tel,name,id_number,org_id,org_name,remark) values(#{tel,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{name},#{idNumber,typeHandler=com.unicom.account.handler.EncryptTypeHandler},#{orgId}," +
-            "(select name from sys_organization where id=#{orgId}),#{remark})")
+            "(select name from sys_organization where id=#{orgId}),#{remark,typeHandler=com.unicom.account.handler.EncryptTypeHandler})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     public int insert(Map<String,Object> huser);
 
     /**

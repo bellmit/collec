@@ -3,9 +3,9 @@ package com.unicom.wx.mp.service;
 /**
  * 公众号用户消息
  *
- * @author : smalljop
+ * @author : yangpeng
  * @description :
- * @create : 2020-12-02 10:34
+ * @create : 2021-10-02 10:34
  **/
 public interface WxMpUserMsgService {
 

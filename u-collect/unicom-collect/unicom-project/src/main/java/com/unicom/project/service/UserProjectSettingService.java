@@ -7,7 +7,7 @@ import com.unicom.project.entity.UserProjectSettingEntity;
 /**
  * 项目表单项(UserProjectSetting)表服务接口
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-11-30 14:00:52
  */
 public interface UserProjectSettingService extends IService<UserProjectSettingEntity> {

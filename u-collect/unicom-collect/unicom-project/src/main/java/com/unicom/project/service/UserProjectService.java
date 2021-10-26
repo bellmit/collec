@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * 项目表(Project)表服务接口
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-11-18 18:16:18
  */
 public interface UserProjectService extends IService<UserProjectEntity> {

@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 微信登录扫码
- * @create : 2020-12-01 17:44
+ * @create : 2021-10-01 17:44
  **/
 @Component
 @RequiredArgsConstructor

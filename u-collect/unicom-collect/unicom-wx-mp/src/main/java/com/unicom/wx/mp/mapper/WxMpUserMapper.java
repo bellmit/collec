@@ -6,7 +6,7 @@ import com.unicom.wx.mp.entity.WxMpUserEntity;
 /**
  * 微信公众号用户 (WxMpUser)表数据库访问层
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-12-01 17:04:37
  */
 public interface WxMpUserMapper extends BaseMapper<WxMpUserEntity> {

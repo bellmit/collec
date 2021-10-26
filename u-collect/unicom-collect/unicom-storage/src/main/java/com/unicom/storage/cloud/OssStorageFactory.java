@@ -7,7 +7,7 @@ import com.unicom.storage.entity.enums.OssTypeEnum;
 /**
  * 文件上传Factory
  *
- * @author smalljop
+ * @author yangpeng
  */
 public final class OssStorageFactory {
     private static OssStorageConfig config;

@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * 项目表(Project)表数据库访问层
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-11-18 18:16:17
  */
 public interface UserProjectMapper extends BaseMapper<UserProjectEntity> {

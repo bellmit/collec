@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author smalljop
+ * @author yangpeng
  * @description: json工具类 使用jackson
  * @create: 2018-10-23 10:21
  **/

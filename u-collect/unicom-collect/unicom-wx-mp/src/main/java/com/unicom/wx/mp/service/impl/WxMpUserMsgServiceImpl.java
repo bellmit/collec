@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description :
- * @create : 2020-12-02 10:36
+ * @create : 2021-10-02 10:36
  **/
 @Service
 public class WxMpUserMsgServiceImpl implements WxMpUserMsgService {

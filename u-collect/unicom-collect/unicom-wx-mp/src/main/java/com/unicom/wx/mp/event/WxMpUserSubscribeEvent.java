@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationEvent;
 /**
  * 微信用户订阅事件
  *
- * @author smalljop
+ * @author yangpeng
  */
 public class WxMpUserSubscribeEvent extends ApplicationEvent {
 

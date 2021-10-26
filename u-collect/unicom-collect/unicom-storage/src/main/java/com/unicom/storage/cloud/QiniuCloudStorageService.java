@@ -15,7 +15,7 @@ import java.io.InputStream;
 /**
  * 七牛云存储
  *
- * @author smalljop
+ * @author yangpeng
  */
 public class QiniuCloudStorageService extends OssStorageService {
     private UploadManager uploadManager;
@@ -53,7 +53,7 @@ public class QiniuCloudStorageService extends OssStorageService {
 //    @Override
 //    public InputStream download(String path) {
 //        final ByteArrayOutputStream output = new ByteArrayOutputStream();
-//        HttpUtil.download(com.smalljop.manage.platform.com.tduck.cloud.wx.mp.config.getDomain() + "/" + path, output, false);
+//        HttpUtil.download(com.yangpeng.manage.platform.com.tduck.cloud.wx.mp.config.getDomain() + "/" + path, output, false);
 //        return new ByteArrayInputStream(output.toByteArray());
 //    }
 

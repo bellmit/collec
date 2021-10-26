@@ -4,9 +4,9 @@ import com.unicom.wx.mp.request.WxMpQrCodeGenRequest;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 扫码处理基本
- * @create : 2020-12-01 17:45
+ * @create : 2021-10-01 17:45
  **/
 public interface ScanStrategy {
 

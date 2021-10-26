@@ -3,25 +3,37 @@ package com.unicom.account.service.impl;
 import com.github.pagehelper.PageInfo;
 
 import com.unicom.account.mapper.HUserMapper;
+import com.unicom.account.mapper.ImportDataMapper;
 import com.unicom.account.service.HUserService;
+import com.unicom.project.entity.UserProjectResultEntity;
+import com.unicom.project.service.UserProjectResultService;
 import com.unicom.roleRightShiro.mapper.OrgMapper;
 import com.unicom.utils.PageUtils;
 import com.unicom.utils.RSAEncrypt;
 import com.unicom.utils.ResponseUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@Transactional
 public class HUserServiceImpl implements HUserService {
     @Autowired
     private HUserMapper hUserMapper;
 
     @Autowired
     private OrgMapper orgMapper;
+
+    @Autowired
+    private ImportDataMapper importDataMapper;
+
+    @Autowired
+    private UserProjectResultService projectResultService;
 
 
 
@@ -37,7 +49,7 @@ public class HUserServiceImpl implements HUserService {
         //解码
         this.enCode(parm,"idNumber");
         this.enCode(parm,"tel");
-
+        this.enCode(parm,"remark");
         //如果
         Map<String,Object> userIds=new HashMap<>();
         userIds.put("userIds",parm.get("id"));
@@ -46,15 +58,32 @@ public class HUserServiceImpl implements HUserService {
         return ResponseUtils.responseSuccess();
     }
 
+    @Override
     public Map<String,Object> add(Map<String,Object> parm){
         //解码
         this.enCode(parm,"idNumber");
         this.enCode(parm,"tel");
+        this.enCode(parm,"remark");
 
+        String rootId=parm.get("rootId")+"";
+        if(StringUtils.isBlank(rootId)){
+            rootId=orgMapper.selectRoot(parm.get("orgId")).get("id")+"";
+        }
+
+        String key=this.importDataMapper.getProjectKey(rootId);
         //如果
         Map<String,Object> userIds=new HashMap<>();
         userIds.put("userIds",parm.get("id"));
         this.hUserMapper.insert(parm);
+
+        UserProjectResultEntity ur=new UserProjectResultEntity();
+
+        ur.setHUserId(Long.parseLong(parm.get("id")+"")); //设置用户id
+        ur.setOrgId(Long.parseLong(parm.get("orgId")+""));
+        ur.setProjectKey(key);
+        projectResultService.saveProjectResult(ur);
+
+
         return ResponseUtils.responseSuccess();
     }
 

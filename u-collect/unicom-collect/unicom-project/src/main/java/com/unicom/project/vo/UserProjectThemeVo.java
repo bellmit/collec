@@ -4,9 +4,9 @@ import com.unicom.project.entity.UserProjectThemeEntity;
 import lombok.Data;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 项目主题
- * @create : 2020-11-25 17:33
+ * @create : 2021-10-25 17:33
  **/
 @Data
 public class UserProjectThemeVo extends UserProjectThemeEntity {

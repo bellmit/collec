@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @description: Oss配置
- * @author: smalljop
+ * @author: yangpeng
  * @create: 2018-10-18 13:53
  **/
 @Data

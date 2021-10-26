@@ -2,7 +2,7 @@ package com.unicom.common.constant;
 
 /**
  * @description: redis key常量
- * @author: smalljop
+ * @author: yangpeng
  * @create: 2020-02-12 22:34
  **/
 public interface RedisKeyConstants {

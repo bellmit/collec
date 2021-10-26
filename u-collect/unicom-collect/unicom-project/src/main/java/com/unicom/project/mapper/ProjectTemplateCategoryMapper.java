@@ -6,7 +6,7 @@ import com.unicom.project.entity.ProjectTemplateCategoryEntity;
 /**
  * 项目模板分类(ProjectTemplateType)表数据库访问层
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2021-01-06 10:51:05
  */
 public interface ProjectTemplateCategoryMapper extends BaseMapper<ProjectTemplateCategoryEntity> {

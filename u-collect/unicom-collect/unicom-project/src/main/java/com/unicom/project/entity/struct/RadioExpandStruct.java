@@ -5,9 +5,9 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : d
- * @create : 2020-11-19 11:42
+ * @create : 2021-10-19 11:42
  **/
 @Data
 public class RadioExpandStruct {

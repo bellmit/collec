@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 /**
  * 项目表单项(UserProjectSetting)表实体类
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-11-30 13:57:26
  */
 

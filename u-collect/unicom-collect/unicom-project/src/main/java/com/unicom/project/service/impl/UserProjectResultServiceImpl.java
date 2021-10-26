@@ -47,7 +47,7 @@ import java.util.stream.Collectors;
 /**
  * 项目表单项(ProjectResult)表服务实现类
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-11-23 14:09:22
  */
 @Service("projectResultService")
@@ -120,7 +120,7 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
                 lambdaQueryWrapper.apply(StrUtil.format("original_data ->'$.{}' {} {} ", item, queryComparison.getKey(), value));
             });
         }
-        IPage<Map<String, Object>> p= this.getBaseMapper().pageProject(request.toMybatisPage(),lambdaQueryWrapper,user.get("rootId"));
+        IPage<Map<String, Object>> p= this.getBaseMapper().pageProject(request.toMybatisPage(),lambdaQueryWrapper,user.get("orgId"));
 
         return p;
     }

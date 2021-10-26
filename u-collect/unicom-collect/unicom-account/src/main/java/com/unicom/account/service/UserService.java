@@ -12,7 +12,7 @@ import com.unicom.common.util.Result;
 /**
  * 用户(AcUser)表服务接口
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-11-10 18:10:42
  */
 public interface UserService extends IService<UserEntity> {

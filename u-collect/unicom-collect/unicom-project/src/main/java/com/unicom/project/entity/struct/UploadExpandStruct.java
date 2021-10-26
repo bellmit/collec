@@ -3,9 +3,9 @@ package com.unicom.project.entity.struct;
 import lombok.Data;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 上传文件
- * @create : 2020-11-19 11:42
+ * @create : 2021-10-19 11:42
  **/
 @Data
 public class UploadExpandStruct {

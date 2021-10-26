@@ -9,7 +9,7 @@ import lombok.Getter;
 /**
  * @author : yangpeng
  * @description : 账号注册登录渠道
- * @create : 2020-11-19 10:51
+ * @create : 2021-10-19 10:51
  **/
 @AllArgsConstructor
 @Getter

@@ -5,9 +5,9 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 账号登录请求
- * @create : 2020-11-10 18:17
+ * @create : 2021-10-10 18:17
  **/
 @Data
 public class AccountLoginRequest {

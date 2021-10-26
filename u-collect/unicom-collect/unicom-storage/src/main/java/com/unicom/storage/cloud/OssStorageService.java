@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 /**
  * @description: Oss基础客户端
- * @author: smalljop
+ * @author: yangpeng
  * @create: 2018-10-18 13:57
  **/
 public abstract class OssStorageService {

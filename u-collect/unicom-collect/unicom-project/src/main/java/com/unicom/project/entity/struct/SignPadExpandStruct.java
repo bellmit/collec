@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * 手写签名组件属性
  *
- * @author smalljop
+ * @author yangpeng
  */
 @Data
 public class SignPadExpandStruct {

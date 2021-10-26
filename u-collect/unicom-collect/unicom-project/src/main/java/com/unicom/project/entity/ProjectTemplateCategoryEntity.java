@@ -8,7 +8,7 @@ import lombok.Data;
 /**
  * 项目模板分类(ProjectTemplateType)表实体类
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2021-01-06 10:50:51
  */
 

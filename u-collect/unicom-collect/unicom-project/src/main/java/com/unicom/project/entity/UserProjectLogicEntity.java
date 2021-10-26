@@ -14,7 +14,7 @@ import java.util.Set;
 /**
  * 项目逻辑(UserProjectLogic)表实体类
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2020-05-01 13:36:27
  */
 @Data

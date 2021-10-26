@@ -6,7 +6,7 @@ import com.unicom.project.entity.ProjectTemplateEntity;
 /**
  * 项目表(ProjectTemplate)表服务接口
  *
- * @author smalljop
+ * @author yangpeng
  * @since 2021-01-06 10:43:01
  */
 public interface ProjectTemplateService extends IService<ProjectTemplateEntity> {

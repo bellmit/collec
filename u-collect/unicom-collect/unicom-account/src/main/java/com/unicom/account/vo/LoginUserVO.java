@@ -5,9 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 登录用户VO
- * @create : 2020-11-12 14:34
+ * @create : 2021-10-12 14:34
  **/
 @Data
 @AllArgsConstructor

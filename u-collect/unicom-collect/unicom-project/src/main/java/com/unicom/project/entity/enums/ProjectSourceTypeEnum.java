@@ -8,9 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 项目来源
- * @create : 2020-12-04 13:35
+ * @create : 2021-10-04 13:35
  **/
 @AllArgsConstructor
 @Getter

@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.Data;
 
 /**
- * @author : smalljop
+ * @author : yangpeng
  * @description : 分页
- * @create : 2020-12-09 10:47
+ * @create : 2021-10-09 10:47
  **/
 @Data
 public class PageRequest {

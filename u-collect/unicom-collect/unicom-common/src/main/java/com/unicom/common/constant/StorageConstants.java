@@ -2,7 +2,7 @@ package com.unicom.common.constant;
 
 /**
  * @description: 文件路径常量
- * @author: smalljop
+ * @author: yangpeng
  * @create: 2020-02-19 14:40
  **/
 public interface StorageConstants {
