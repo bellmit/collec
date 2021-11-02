@@ -24,11 +24,15 @@ public interface UserProjectResultMapper extends BaseMapper<UserProjectResultEnt
 
     @Select("<script> " +
             "select * from (" +
-            "select a.name,a.id_number ,a.tel,a.remark,o.name as orgName,b.project_key as projectKey,b.serial_number as serialNumber,b.process_data as processData,b.submit_ua as submitUa,b.submit_os as submitOs," +
+            "select " +
+            "CONCAT((select name from h_user where id_number=a.remark),'户') as fname, if(a.id_number=a.remark,1,0) as  isHead," +
+            "a.name,a.id_number ,a.tel,a.remark,o.name as orgName,b.project_key as projectKey,b.serial_number as serialNumber,b.process_data as processData,b.submit_ua as submitUa,b.submit_os as submitOs," +
             " b.submit_browser as submitBrowser,b.submit_request_ip as submitRequestIp,b.submit_address as submitAddress,b.complete_time as completeTime,b.wx_open_id as wxOpenId,b.wx_user_info as wxUserInfo,b.create_time as createTime," +
             " b.update_time as updateTime,  " +
             " b.*"+
-             " from h_user  a inner join sys_organization  o on a.org_id=o.id " +
+            " from h_user  a inner join sys_organization  o on a.org_id=o.id " +
+            " <if  test=\"keyword !='' and keyword !=null\"> and ( a.tel=#{keyword,typeHandler=com.unicom.account.handler.EncryptTypeHandler}  or  a.id_Number=#{keyword,typeHandler=com.unicom.account.handler.EncryptTypeHandler} " +
+            " or a.name like CONCAT(#{keyword},'%') )</if>"+
              "<if  test=\"orgId !='' and orgId !=null\">   " +
              " and  a.org_id  in(" +
             "  WITH RECURSIVE td AS (\r" +
@@ -38,8 +42,7 @@ public interface UserProjectResultMapper extends BaseMapper<UserProjectResultEnt
             " ) SELECT * FROM td ORDER BY td.id )  "+
             "  </if>" +
             " left join pr_user_project_result b  on a.id=b.h_user_id ) k" +
-
-            "  ${ew.customSqlSegment}" +
+            "  ${ew.customSqlSegment} order by fname desc,isHead desc,createTime desc " +
             "</script>"
 
     )
@@ -48,7 +51,7 @@ public interface UserProjectResultMapper extends BaseMapper<UserProjectResultEnt
             @Result(property = "tel", column = "tel", typeHandler = EncryptTypeHandler.class),//
             @Result(property = "remark", column = "remark", typeHandler = EncryptTypeHandler.class),//
     })
-    public IPage<Map<String,Object>> pageProject(IPage<Map<String,Object>>  page, @Param(Constants.WRAPPER) Wrapper queryWrapper,@Param("orgId") Object OrgId);
+    public IPage<Map<String,Object>> pageProject(IPage<Map<String,Object>>  page, @Param(Constants.WRAPPER) Wrapper queryWrapper,@Param("orgId") Object OrgId,@Param("keyword") String keyword);
 
 
 
@@ -68,7 +71,6 @@ public interface UserProjectResultMapper extends BaseMapper<UserProjectResultEnt
             " ) SELECT * FROM td ORDER BY td.id )  "+
             "  </if>" +
             " left join pr_user_project_result b  on a.id=b.h_user_id ) k" +
-
             "  ${ew.customSqlSegment}" +
             "</script>"
 

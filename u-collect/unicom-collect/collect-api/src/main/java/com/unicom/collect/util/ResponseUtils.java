@@ -25,7 +25,6 @@ public class ResponseUtils {
      * @param result
      */
     public static void outJson(ServletResponse response, Object result) {
-
         PrintWriter out = null;
         try {
             response.setCharacterEncoding("UTF-8");
@@ -66,6 +65,4 @@ public class ResponseUtils {
             e.printStackTrace();
         }
     }
-
-
 }

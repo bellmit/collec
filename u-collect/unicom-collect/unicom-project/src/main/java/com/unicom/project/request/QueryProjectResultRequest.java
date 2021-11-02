@@ -37,6 +37,11 @@ public class QueryProjectResultRequest extends PageRequest {
     private LocalDateTime endDateTime;
 
 
+    private Object orgId;
+
+    private String keyword;
+
+
     /**
      * 动态字段 参数json
      */

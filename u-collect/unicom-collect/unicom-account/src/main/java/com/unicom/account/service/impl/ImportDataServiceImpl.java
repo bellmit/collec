@@ -242,7 +242,7 @@ public class ImportDataServiceImpl implements ImportDataService {
 
             String tempOrgId = cache.get(org.get("orgName"));
             if (tempOrgId == null) {
-                return new Tuple4<>(false, " 导入失败,传入了错误的组织机构信息！", 0,null);
+                return new Tuple4<>(false, " 导入失败,传入了错误的组织机构信息！("+org.get("orgName")+")", 0,null);
             }
             orgSet.add(tempOrgId);
 //            //查找rootOrgId

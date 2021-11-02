@@ -107,8 +107,9 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
         LambdaQueryWrapper<UserProjectResultEntity> lambdaQueryWrapper = Wrappers.<UserProjectResultEntity>lambdaQuery()
                 .eq(ObjectUtil.isNotNull(request.getProjectKey()),UserProjectResultEntity::getProjectKey, request.getProjectKey())
                 .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getCreateTime, request.getEndDateTime())
-                .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getCreateTime, request.getBeginDateTime())
-                .orderByDesc(BaseEntity::getCreateTime);
+                .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getCreateTime, request.getBeginDateTime());
+
+
         if (ObjectUtil.isNotNull(request.getExtParamsMap())) {
             request.getExtParamsMap().keySet().forEach(item -> {
                 String comparison = MapUtil.getStr(request.getExtComparisonsMap(), item);
@@ -120,7 +121,9 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
                 lambdaQueryWrapper.apply(StrUtil.format("original_data ->'$.{}' {} {} ", item, queryComparison.getKey(), value));
             });
         }
-        IPage<Map<String, Object>> p= this.getBaseMapper().pageProject(request.toMybatisPage(),lambdaQueryWrapper,user.get("orgId"));
+        if(request.getOrgId()==null)
+            request.setOrgId(user.get("orgId"));
+        IPage<Map<String, Object>> p= this.getBaseMapper().pageProject(request.toMybatisPage(),lambdaQueryWrapper,request.getOrgId(),request.getKeyword());
 
         return p;
     }
