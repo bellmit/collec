@@ -1,4 +1,4 @@
-package com.unicom.collect.util;
+package com.unicom.roleRightShiro.utils;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.crypto.digest.DigestUtil;
@@ -18,6 +18,8 @@ import java.util.SortedMap;
 @Slf4j
 public class SignUtils {
 
+    private final static String SIGN_KEY_NAME = "sign";
+
     /**
      * 验签
      *
@@ -34,8 +36,6 @@ public class SignUtils {
         return StringUtils.isNotBlank(paramsSign) && urlSign.equals(paramsSign);
     }
 
-    private final static String SIGN_KEY_NAME = "sign";
-
 
     /**
      * 根据参数获取sign 签名算法
@@ -50,11 +50,13 @@ public class SignUtils {
         params.remove(SIGN_KEY_NAME);
         String paramsJson = JsonUtils.mapToJson(params);
         StringBuffer sb = new StringBuffer(secret).append(paramsJson);
+        System.out.println(sb.toString());
         return DigestUtil.md5Hex(sb.toString()).toLowerCase();
     }
 
     public static void main(String[] args) {
         String str = "916lWh2WMcbSWiHv{\"account\":\"250543222@qq.com\",\"email\":\"\",\"password\":\"12345678\",\"slideCode\":\"4qjhWc84KROSbxGF7yyVG21G1EHDp/PRA5RcUKIc/9oHzUPfJRie3Mt27WjI+eTMTjgzzGfdc4dA1gv9g8HQy7TshvmMbQt0w0H+8CVEfbg=\",\"timestamp\":\"1607938108778\"}\n";
+        str="4jBw1n05RmfK2dtbY9ma03n9kB92647z{\"appId\":\"0HdY2ESXnE\",\"idNumbers\":[\"430721199611170000\"],\"nonce\":\"23232\",\"timestamp\":1636532653520}";
         System.out.println(DigestUtil.md5Hex(str).toLowerCase());
     }
 

@@ -22,6 +22,7 @@ import com.unicom.common.util.AddressUtils;
 import com.unicom.common.util.AsyncProcessUtils;
 import com.unicom.common.util.RedisUtils;
 import com.unicom.common.util.Result;
+import com.unicom.project.entity.UserProjectEntity;
 import com.unicom.project.entity.UserProjectItemEntity;
 import com.unicom.project.entity.UserProjectResultEntity;
 import com.unicom.project.entity.enums.ProjectItemTypeEnum;
@@ -34,7 +35,9 @@ import com.unicom.project.vo.ExportProjectResultVO;
 import com.unicom.storage.cloud.OssStorageFactory;
 import com.unicom.storage.util.StorageUtils;
 import com.unicom.project.constant.ProjectRedisKeyConstants;
+import com.unicom.utils.ResponseUtils;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.boot.system.ApplicationHome;
 import org.springframework.stereotype.Service;
@@ -127,6 +130,47 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
 
         return p;
     }
+
+
+    @Override
+    public Object getData(Map<String,Object> request) {
+        Map<String, Object> user = (Map<String, Object>) SecurityUtils.getSubject().getSession().getAttribute(IConstants.SESSION_USER_INFO);
+        if(user==null)
+            user=new HashMap<>();
+
+       Object is=request.get("idNumbers");
+
+       if(is==null)
+           return ResponseUtils.responseError("必须包含正确的身份数据");
+
+       List idNumbers=(List)is;
+       Collection<Map<String,Object>> cldata=this.getBaseMapper().getData(idNumbers);
+       String projectKey=null;
+       //获取projectKey
+       for(Map<String,Object> data:cldata){
+           projectKey=data.get("projectKey")+"";
+           break;
+       }
+      //查出key
+        List<UserProjectItemEntity> ues=userProjectItemService.listByProjectKey(projectKey);
+
+      for(Map<String,Object> data:cldata){
+          for(UserProjectItemEntity en:ues){
+            data.put("processData",data.get("processData").toString().replaceAll("field"+en.getFormItemId(),en.getLabel()));
+            data.put("idNumber", StringUtils.overlay(data.get("idNumber").toString(),"*******",5,12));
+            data.remove("projectKey");
+          }
+      }
+
+
+        // 替换
+      return cldata;
+
+
+    }
+
+
+
 
     @Override
     public ExportProjectResultVO exportProjectResult(QueryProjectResultRequest request) {
@@ -269,4 +313,6 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
         });
         return Result.success(uuid);
     }
+
+
 }

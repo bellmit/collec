@@ -1,9 +1,9 @@
-package com.unicom.collect.util;
+package com.unicom.roleRightShiro.utils;
 
 import cn.hutool.core.util.CharUtil;
 import cn.hutool.core.util.StrUtil;
-import com.unicom.collect.web.wrapper.BodyReaderHttpServletRequestWrapper;
 import com.unicom.common.util.JsonUtils;
+import com.unicom.roleRightShiro.common.BodyReaderHttpServletRequestWrapper;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpMethod;

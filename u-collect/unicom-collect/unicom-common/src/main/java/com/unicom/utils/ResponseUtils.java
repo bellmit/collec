@@ -1,12 +1,41 @@
 package com.unicom.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unicom.common.IConstants;
+import lombok.extern.slf4j.Slf4j;
 
+import javax.servlet.ServletResponse;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-
+@Slf4j
 public class ResponseUtils {
+
+	/**
+	 * 使用response输出JSON
+	 *
+	 * @param response
+	 * @param result
+	 */
+	public static void outJson(ServletResponse response, Object result) {
+		PrintWriter out = null;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json");
+			out = response.getWriter();
+			out.println(new ObjectMapper().writeValueAsString(result));
+		} catch (Exception e) {
+			log.error(e + "输出JSON出错");
+		} finally {
+			if (out != null) {
+				out.flush();
+				out.close();
+			}
+		}
+	}
+
+
 	public static Map<String, Object> response(int resultIntSuccess, Object data, String message) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("status", resultIntSuccess);

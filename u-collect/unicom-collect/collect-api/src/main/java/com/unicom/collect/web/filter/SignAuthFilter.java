@@ -35,9 +35,11 @@ public class SignAuthFilter implements Filter {
     private final static Long MAX_EFFECTIVE_TIMESTAMP = 10L * 1000;
     private PlatformSignProperties platformSignProperties;
 
+
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-
+        log.info("--------------进校验---------------------");
         //是否配置了过滤
         AntPathMatcher matcher = new AntPathMatcher();
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;

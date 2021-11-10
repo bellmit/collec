@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import static com.unicom.project.constant.ProjectRedisKeyConstants.PROJECT_VIEW_IP_LIST;
 
@@ -181,6 +182,13 @@ public class UserProjectResultController {
     public Result queryProjectResults(QueryProjectResultRequest request) {
        // return Result.success(projectResultService.listByQueryConditions(request));
         return Result.success(projectResultService.listByQueryConditions2(request));
+    }
+
+
+    @RequestMapping(value = "/getData", method = RequestMethod.POST)
+    public Result queryData(@RequestBody Map<String,Object> request) {
+        // return Result.success(projectResultService.listByQueryConditions(request));
+        return Result.success(projectResultService.getData(request));
     }
 
 

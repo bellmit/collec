@@ -7,6 +7,8 @@ import com.unicom.project.entity.UserProjectResultEntity;
 import com.unicom.project.request.QueryProjectResultRequest;
 import com.unicom.project.vo.ExportProjectResultVO;
 
+import java.util.Map;
+
 /**
  * 项目表单项(ProjectResult)表服务接口
  *
@@ -22,6 +24,10 @@ public interface UserProjectResultService extends IService<UserProjectResultEnti
      * @param entity
      */
     void saveProjectResult(UserProjectResultEntity entity);
+
+
+
+    public Object getData(Map<String,Object> request);
 
     /**
      * 根据查询参数

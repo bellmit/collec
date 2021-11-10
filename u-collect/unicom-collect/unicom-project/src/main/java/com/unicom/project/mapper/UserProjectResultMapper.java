@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -81,6 +82,27 @@ public interface UserProjectResultMapper extends BaseMapper<UserProjectResultEnt
             @Result(property = "remark", column = "remark", typeHandler = EncryptTypeHandler.class),//
     })
     public Collection<Map<String,Object>> list( @Param(Constants.WRAPPER) Wrapper queryWrapper, @Param("orgId") Object OrgId);
+
+
+
+
+    @Select("<script> " +
+
+            "select a.name,a.id_number ,b.project_key as projectKey,b.process_data as processData" +
+            " from h_user  a " +
+            " left join pr_user_project_result b  on a.id=b.h_user_id " +
+            "where id_number in "+
+            "<foreach collection='ids' item='id' open='(' separator=',' close=')'>"+
+                "#{id,typeHandler=com.unicom.account.handler.EncryptTypeHandler}"+
+            "</foreach>"+
+            "</script>"
+
+    )
+    @Results({//
+            @Result(property = "idNumber", column = "id_number", typeHandler = EncryptTypeHandler.class)
+    })
+    public Collection<Map<String,Object>> getData(@Param("ids") List ids);
+
 
 
 }

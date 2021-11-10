@@ -4,6 +4,7 @@ package com.unicom.roleRightShiro.config;
 import com.unicom.common.IConstants;
 import com.unicom.roleRightShiro.common.CustomerSessionUUID;
 import com.unicom.roleRightShiro.filter.CustomerTokenFilter;
+import com.unicom.roleRightShiro.filter.SignFilter;
 import com.unicom.roleRightShiro.realm.RoleRightCommonRealm;
 import com.unicom.roleRightShiro.shrioDao.RedisSessionDao;
 import lombok.Getter;
@@ -85,6 +86,8 @@ public class ShiroConfig {
 		// 添加自己的过滤器
 		Map<String, Filter> filterMap = new HashMap<>();
 		filterMap.put("token", new CustomerTokenFilter(cacheType, replayTimeOut, redisTemplate));
+		filterMap.put("signToken",new SignFilter());
+
 		factoryBean.setFilters(filterMap);
 
 
@@ -100,6 +103,9 @@ public class ShiroConfig {
 		filterRuleMap.put("/login/vcode", "anon");
 		filterRuleMap.put("/user/smsCode", "anon");
 		filterRuleMap.put("/user/project/page2","anon");
+
+		filterRuleMap.put("/api/*","signToken");
+
 
 		filterRuleMap.put("/project/template/**", "anon");
 

@@ -10,12 +10,9 @@ import java.util.Map;
 public interface HUserMapper {
 
     @Select("<script>" +
-
-
             "select a.id,a.name,a.id_number,a.tel,a.org_Id as orgId, a.org_name as orgName,a.remark,if(a.id_number=a.remark,1,0) as  isHead, CONCAT((select name from h_user where id_number=a.remark),'户') as fname "+
             " from "+
             " h_user a " +
-
             " where 1=1 " +
             " <if  test=\"keyword !='' and keyword !=null\"> and ( a.tel=#{keyword,typeHandler=com.unicom.account.handler.EncryptTypeHandler}  or  a.id_Number=#{keyword,typeHandler=com.unicom.account.handler.EncryptTypeHandler} " +
             " or a.name like CONCAT(#{keyword},'%') )</if>"+
@@ -83,7 +80,5 @@ public interface HUserMapper {
             "   SELECT c.id FROM sys_organization c ,td WHERE c.parentId = td.id" +
             ") SELECT * FROM td ORDER BY td.id ) ")
     public int deleteUserByorgs(Map<String,Object> parm);
-
-
 
 }

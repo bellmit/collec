@@ -1,5 +1,6 @@
 package com.unicom.collect.config;
 
+import com.unicom.collect.web.filter.DataFilter;
 import com.unicom.collect.web.filter.HttpTraceLogFilter;
 import com.unicom.collect.web.filter.SignAuthFilter;
 import com.unicom.collect.web.filter.ValidateCodeFilter;
@@ -99,6 +100,24 @@ public class FilterConfig {
         registration.setFilter(new ValidateCodeFilter());
         registration.addUrlPatterns("/*");
         registration.setName("validateCodeFilter");
+        registration.setOrder(Integer.MAX_VALUE - 1);
+        return registration;
+    }
+
+    /**
+     * 数据api过滤器
+     *
+     * @return
+     */
+    @Bean
+    @ConditionalOnProperty(prefix = "platform.api", name = "enable", havingValue = "true", matchIfMissing = true)
+    public FilterRegistrationBean apiFilterRegistartion() {
+        System.out.println("--------------加载过滤器------------------");
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setDispatcherTypes(DispatcherType.REQUEST);
+        registration.setFilter(new DataFilter());
+        registration.addUrlPatterns("/collect-api/api/*");
+        registration.setName("apiFilter");
         registration.setOrder(Integer.MAX_VALUE - 1);
         return registration;
     }

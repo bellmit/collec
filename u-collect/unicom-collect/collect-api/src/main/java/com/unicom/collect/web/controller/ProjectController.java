@@ -50,7 +50,6 @@ public class ProjectController {
         return Result.success();
     }
 
-
     /**
      * 检查手机号验证码是否正确
      */

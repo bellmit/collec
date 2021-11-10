@@ -49,7 +49,7 @@ platform:
     trace-log: false
   sign:
     enable: false
-    secret: 916lWh2WMcbSWiHv
+    secret: 916lWh2WMcNSWiHv
     ignore-urls:
       - /collect-api/webjars/**
       - /collect-api/swagger/**
