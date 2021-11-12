@@ -109,8 +109,8 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
             user=new HashMap<>();
         LambdaQueryWrapper<UserProjectResultEntity> lambdaQueryWrapper = Wrappers.<UserProjectResultEntity>lambdaQuery()
                 .eq(ObjectUtil.isNotNull(request.getProjectKey()),UserProjectResultEntity::getProjectKey, request.getProjectKey())
-                .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getCreateTime, request.getEndDateTime())
-                .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getCreateTime, request.getBeginDateTime());
+                .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getUpdateTime, request.getEndDateTime())
+                .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getUpdateTime, request.getBeginDateTime());
 
 
         if (ObjectUtil.isNotNull(request.getExtParamsMap())) {
@@ -189,20 +189,20 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
         //结果
         List<UserProjectResultEntity> resultEntityList = this.list(Wrappers.<UserProjectResultEntity>lambdaQuery()
                 .eq(UserProjectResultEntity::getProjectKey, request.getProjectKey())
-                .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getCreateTime, request.getEndDateTime())
-                .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getCreateTime, request.getBeginDateTime())
+                .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getUpdateTime, request.getEndDateTime())
+                .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getUpdateTime, request.getBeginDateTime())
                 .orderByDesc(BaseEntity::getCreateTime));
 
-        Collection<Map<String,Object>> resulet=this.getBaseMapper().list(Wrappers.<UserProjectResultEntity>lambdaQuery()
+        Collection<Map<String,Object>> result=this.getBaseMapper().list(Wrappers.<UserProjectResultEntity>lambdaQuery()
                 .eq(UserProjectResultEntity::getProjectKey, request.getProjectKey())
-                .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getCreateTime, request.getEndDateTime())
-                .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getCreateTime, request.getBeginDateTime())
+                .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getUpdateTime, request.getEndDateTime())
+                .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getUpdateTime, request.getBeginDateTime())
                 .orderByDesc(BaseEntity::getCreateTime),user.get("rootId"));
         if (CollectionUtil.isEmpty(resultEntityList)) {
             throw new BaseException("此表单无有效反馈，不能导出");
         }
         ObjectMapper mapper = new ObjectMapper();
-        List<Map<String, Object>> resultList = resulet.stream().map(item -> {
+        List<Map<String, Object>> resultList = result.stream().map(item -> {
             Map<String, Object> processData = null;
             try {
                 if(item.get("processData")!=null)
@@ -221,11 +221,17 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
                 }
             }
 
-            processData.put(BaseEntity.Fields.createTime, item.get("createTime"));
-            processData.put(UserProjectResultEntity.Fields.submitAddress, item.get("submitAddress"));
+           // processData.put(BaseEntity.Fields.createTime, item.get("createTime"));
+            //processData.put(UserProjectResultEntity.Fields.submitAddress, item.get("submitAddress"));
             processData.put("idNumber",item.get("idNumber"));
             processData.put("name",item.get("name"));
             processData.put("orgName",item.get("orgName"));
+
+            for(ExportProjectResultVO.ExcelHeader head:titleList){
+                if(processData.get(head.getFieldKey())==null){
+                    processData.put(head.getFieldKey(),null);
+                }
+            }
             return processData;
         }).collect(Collectors.toList());
         List<ExportProjectResultVO.ExcelHeader> allHeaderList = new ArrayList<>();
@@ -237,16 +243,13 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
         head1.setFieldKey("idNumber");
         head1.setTitle("身份证号码");
 
-
-
-
         ExportProjectResultVO.ExcelHeader head3=new ExportProjectResultVO.ExcelHeader();
         head3.setFieldKey("orgName");
         head3.setTitle("所属机构");
         allHeaderList.add(head2);
         allHeaderList.add(head1);
         allHeaderList.add(head3);
-        allHeaderList.addAll(ExportProjectResultVO.DEFAULT_HEADER_NAME);
+        //allHeaderList.addAll(ExportProjectResultVO.DEFAULT_HEADER_NAME);
         allHeaderList.addAll(titleList);
 
 
@@ -274,9 +277,9 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
         //结果
         List<UserProjectResultEntity> resultEntityList = this.list(Wrappers.<UserProjectResultEntity>lambdaQuery()
                 .eq(UserProjectResultEntity::getProjectKey, request.getProjectKey())
-                .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getCreateTime, request.getEndDateTime())
-                .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getCreateTime, request.getBeginDateTime())
-                .orderByDesc(BaseEntity::getCreateTime));
+                .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getUpdateTime, request.getEndDateTime())
+                .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getUpdateTime, request.getBeginDateTime())
+                .orderByDesc(BaseEntity::getUpdateTime));
         if (CollectionUtil.isEmpty(resultEntityList) || CollectionUtil.isEmpty(userProjectItemEntityList)) {
             return Result.failed("暂无收集附件，无法下载");
         }

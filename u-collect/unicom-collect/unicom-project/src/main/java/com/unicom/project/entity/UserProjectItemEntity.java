@@ -58,6 +58,9 @@ public class UserProjectItemEntity extends BaseEntity<UserProjectItemEntity> {
      */
     private Boolean showLabel;
 
+
+    private Boolean isShow;
+
     /**
      * 表单项默认值
      */

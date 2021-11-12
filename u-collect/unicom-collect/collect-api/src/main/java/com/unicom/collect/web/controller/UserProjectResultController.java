@@ -143,6 +143,8 @@ public class UserProjectResultController {
         });
         //设置每列默认宽度
         writer.setColumnWidth(-1, 20);
+
+
         // 一次性写出内容，使用默认样式，强制输出标题
         writer.write(exportProjectResultVO.getResultList(), true);
         //out为OutputStream，需要写出到的目标流

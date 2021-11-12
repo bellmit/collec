@@ -11,6 +11,7 @@ import com.unicom.roleRightShiro.utils.HttpUtils;
 import com.unicom.roleRightShiro.utils.SignUtils;
 import com.unicom.roleRightShiro.utils.SpringUtils;
 import com.unicom.utils.ResponseUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;
 import java.util.SortedMap;
-
+@Slf4j
 public class SignFilter extends AccessControlFilter {
     private final static String TIMESTAMP_KEY_NAME = "timestamp";
     /**
      * 最大有效时间 默认 10秒钟失效 超出10s失效
      */
-    private final static Long MAX_EFFECTIVE_TIMESTAMP = 2000L * 1000;
+    private final static Long MAX_EFFECTIVE_TIMESTAMP = 25L * 1000;
 
 
     @Autowired
@@ -69,30 +70,36 @@ public class SignFilter extends AccessControlFilter {
         }
         //取出时间戳 做超时校验
         Long timestamp = MapUtil.getLong(allParams, TIMESTAMP_KEY_NAME);
+
         if (ObjectUtil.isNull(timestamp)) {
             ResponseUtils.outJson(response, Result.failed(ResponseCodeConstants.SIGN_FAIL_CODE, ResponseCodeConstants.SIGN_FAIL_MSG));
             // ResponseUtils.responseError("请求无效！");
             return;
         }
         Long diffTimestamp = System.currentTimeMillis() - timestamp;
+
         if (diffTimestamp > MAX_EFFECTIVE_TIMESTAMP) {
+            log.info("时间戳验证问题！"+diffTimestamp);
             ResponseUtils.outJson(response, Result.failed(ResponseCodeConstants.SIGN_FAIL_CODE, ResponseCodeConstants.SIGN_FAIL_MSG));
             return;
         }
 
         String nonce=MapUtil.getStr(allParams,"nonce");
         if(StringUtils.isBlank(nonce)){
+            log.info("随机数验证问题！");
             ResponseUtils.outJson(response, Result.failed(ResponseCodeConstants.SIGN_FAIL_CODE, ResponseCodeConstants.SIGN_FAIL_MSG));
         }
 
         String appId=MapUtil.getStr(allParams,"appId");
         if(StringUtils.isBlank(appId)){
+            log.info("appId问题！");
             ResponseUtils.outJson(response, Result.failed(ResponseCodeConstants.SIGN_FAIL_CODE, ResponseCodeConstants.SIGN_FAIL_MSG));
         }
         if(signMapper==null)
             signMapper=(SignMapper) SpringUtils.getBean(SignMapper.class);
         Map<String,String> sign=signMapper.select(appId);
         if(sign==null){
+            log.info("签名问题！");
             ResponseUtils.outJson(response, Result.failed(ResponseCodeConstants.SIGN_FAIL_CODE, ResponseCodeConstants.SIGN_FAIL_MSG));
         }
 
