@@ -30,9 +30,9 @@ public class UnicomArithmeticCaptcha extends ArithmeticCaptcha {
     protected char[] alphas() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < len; i++) {
-            sb.append(num(1, 80));
+            sb.append(num(1, 10));
             if (i < len - 1) {
-                int type = num(1, 3);
+                int type = 1;
                 if (type == 1) {
                     sb.append("+");
                 } else if (type == 2) {
