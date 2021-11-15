@@ -84,7 +84,7 @@ public interface UserProjectResultMapper extends BaseMapper<UserProjectResultEnt
             @Result(property = "tel", column = "tel", typeHandler = EncryptTypeHandler.class),//
             @Result(property = "remark", column = "remark", typeHandler = EncryptTypeHandler.class),//
     })
-    public Collection<Map<String,Object>> list( @Param(Constants.WRAPPER) Wrapper queryWrapper, @Param("orgId") Object OrgId);
+    public Collection<Map<String,Object>> list( @Param(Constants.WRAPPER) Wrapper queryWrapper, @Param("orgId") Object OrgId,@Param("keyword") String keyword);
 
 
 

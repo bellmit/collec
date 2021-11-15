@@ -32,7 +32,7 @@ public class SignFilter extends AccessControlFilter {
     /**
      * 最大有效时间 默认 10秒钟失效 超出10s失效
      */
-    private final static Long MAX_EFFECTIVE_TIMESTAMP = 25L * 1000;
+    private final static Long MAX_EFFECTIVE_TIMESTAMP = 60L * 1000;
 
 
     @Autowired

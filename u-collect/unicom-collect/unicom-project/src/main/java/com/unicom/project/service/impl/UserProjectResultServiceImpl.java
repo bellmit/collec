@@ -197,7 +197,7 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
                 .eq(UserProjectResultEntity::getProjectKey, request.getProjectKey())
                 .le(ObjectUtil.isNotNull(request.getEndDateTime()), UserProjectResultEntity::getUpdateTime, request.getEndDateTime())
                 .ge(ObjectUtil.isNotNull(request.getBeginDateTime()), UserProjectResultEntity::getUpdateTime, request.getBeginDateTime())
-                .orderByDesc(BaseEntity::getCreateTime),user.get("rootId"));
+                .orderByDesc(BaseEntity::getCreateTime),user.get("rootId"),request.getKeyword());
         if (CollectionUtil.isEmpty(resultEntityList)) {
             throw new BaseException("此表单无有效反馈，不能导出");
         }
