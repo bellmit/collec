@@ -19,6 +19,18 @@ server:
   port: 8999
   servlet:
     context-path: /collect-api
+  compression:
+
+    enabled: true
+
+    min-response-size: 1024
+
+    mime-types:
+      - text/html
+      - application/javascript
+      - text/css
+      - application/octet-stream
+      - application/json
 
 # 日志级别
 logging:

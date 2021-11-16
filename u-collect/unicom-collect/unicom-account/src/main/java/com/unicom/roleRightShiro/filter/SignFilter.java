@@ -109,13 +109,13 @@ public class SignFilter extends AccessControlFilter {
             chain.doFilter(requestWrapper, response);
             return;
         } else {
+            log.info("签名验证失败！");
             ResponseUtils.outJson(response, Result.failed(ResponseCodeConstants.SIGN_FAIL_CODE, ResponseCodeConstants.SIGN_FAIL_MSG));
+
         }
 
-       super.doFilterInternal(request, response, chain);
+       //super.doFilterInternal(request, response, chain);
     }
 
-    public static void main(String[] args) {
-        System.out.println(System.currentTimeMillis());
-    }
+
 }

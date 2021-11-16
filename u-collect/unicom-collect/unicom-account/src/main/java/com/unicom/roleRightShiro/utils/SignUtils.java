@@ -55,10 +55,11 @@ public class SignUtils {
     }
 
     public static void main(String[] args) {
+        long time=System.currentTimeMillis();
+        System.out.println(time);
         String str = "916lWh2WMcbSWiHv{\"account\":\"250543222@qq.com\",\"email\":\"\",\"password\":\"12345678\",\"slideCode\":\"4qjhWc84KROSbxGF7yyVG21G1EHDp/PRA5RcUKIc/9oHzUPfJRie3Mt27WjI+eTMTjgzzGfdc4dA1gv9g8HQy7TshvmMbQt0w0H+8CVEfbg=\",\"timestamp\":\"1607938108778\"}\n";
-        str="4jBw1n05RmfK2dtbY9ma03n9kB92647z{\"appId\":\"0HdY2ESXnE\",\"idNumbers\":[\"430821195312234825\"],\"nonce\":\"23232\",\"timestamp\":1636940033209}";
+        str="4jBw1n05RmfK2dtbY9ma03n9kB92647z{\"appId\":\"0HdY2ESXnE\",\"idNumbers\":[\"430821195312234825\",\"430821198912174831\",\"431102198602252017\"],\"nonce\":\"23232\",\"timestamp\":"+time+"}";
         System.out.println(DigestUtil.md5Hex(str).toLowerCase());
     }
-
 
 }
