@@ -75,9 +75,6 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
         this.saveOrUpdate(entity);
     }
 
-
-
-
     @Override
     public Page listByQueryConditions(QueryProjectResultRequest request) {
         LambdaQueryWrapper<UserProjectResultEntity> lambdaQueryWrapper = Wrappers.<UserProjectResultEntity>lambdaQuery()
@@ -127,7 +124,6 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
         if(request.getOrgId()==null)
             request.setOrgId(user.get("orgId"));
         IPage<Map<String, Object>> p= this.getBaseMapper().pageProject(request.toMybatisPage(),lambdaQueryWrapper,request.getOrgId(),request.getKeyword());
-
         return p;
     }
 
@@ -155,26 +151,18 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
         List<UserProjectItemEntity> ues=userProjectItemService.listByProjectKey(projectKey);
         ObjectMapper mapper = new ObjectMapper();
       for(Map<String,Object> data:cldata){
-
+          if(data.get("processData")==null)
+              data.put("processData","{}");
           for(UserProjectItemEntity en:ues){
             data.put("processData",data.get("processData").toString().replaceAll("field"+en.getFormItemId(),en.getLabel()));
 
             data.put("idNumber", StringUtils.overlay(data.get("idNumber").toString(),"*******",5,12));
             data.remove("projectKey");
           }
-
-
       }
-
-
-
-        // 替换
+      // 替换
       return cldata;
-
-
     }
-
-
 
 
     @Override

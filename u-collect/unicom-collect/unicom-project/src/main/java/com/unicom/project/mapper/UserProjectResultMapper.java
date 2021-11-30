@@ -26,7 +26,16 @@ public interface UserProjectResultMapper extends BaseMapper<UserProjectResultEnt
     @Select("<script> " +
             "select * from (" +
             "select " +
-            "CONCAT((select name from h_user where id_number=a.remark),'户') as fname, if(a.id_number=a.remark,1,0) as  isHead," +
+            "CONCAT((select name from h_user where id_number=a.remark" +
+            "<if  test=\"orgId !='' and orgId !=null\">   " +
+            " and  org_id  in(" +
+            "  WITH RECURSIVE td AS (\r" +
+            "    SELECT id FROM sys_organization   where id=#{orgId} " +
+            "    UNION  " +
+            "    SELECT c.id FROM sys_organization c ,td WHERE c.parentId = td.id " +
+            " ) SELECT * FROM td ORDER BY td.id )  "+
+            "  </if>" +
+            "),'户') as fname, if(a.id_number=a.remark,1,0) as  isHead," +
             "a.name,a.id_number ,a.tel,a.remark,o.name as orgName,b.project_key as projectKey,b.serial_number as serialNumber,b.process_data as processData,b.submit_ua as submitUa,b.submit_os as submitOs," +
             " b.submit_browser as submitBrowser,b.submit_request_ip as submitRequestIp,b.submit_address as submitAddress,b.complete_time as completeTime,b.wx_open_id as wxOpenId,b.wx_user_info as wxUserInfo,b.create_time as createTime," +
             " date_format(b.update_time,'%Y-%m-%d %H:%i:%S') as updateTime,  " +
