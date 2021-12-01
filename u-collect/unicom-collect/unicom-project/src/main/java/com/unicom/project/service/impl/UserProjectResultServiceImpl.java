@@ -151,13 +151,12 @@ public class UserProjectResultServiceImpl extends ServiceImpl<UserProjectResultM
         List<UserProjectItemEntity> ues=userProjectItemService.listByProjectKey(projectKey);
         ObjectMapper mapper = new ObjectMapper();
       for(Map<String,Object> data:cldata){
+          data.put("idNumber", StringUtils.overlay(data.get("idNumber").toString(),"*******",5,12));
+          data.remove("projectKey");
           if(data.get("processData")==null)
               data.put("processData","{}");
           for(UserProjectItemEntity en:ues){
             data.put("processData",data.get("processData").toString().replaceAll("field"+en.getFormItemId(),en.getLabel()));
-
-            data.put("idNumber", StringUtils.overlay(data.get("idNumber").toString(),"*******",5,12));
-            data.remove("projectKey");
           }
       }
       // 替换
