@@ -100,9 +100,10 @@ public interface UserProjectResultMapper extends BaseMapper<UserProjectResultEnt
 
     @Select("<script> " +
 
-            "select a.name,a.id_number ,b.project_key as projectKey,b.process_data as processData" +
+            "select a.name,a.id_number ,o.name as orgName,b.project_key as projectKey,b.process_data as processData" +
             " from h_user  a " +
             " left join pr_user_project_result b  on a.id=b.h_user_id " +
+            " left join sys_organization o on a.root_org_id=c.id "+
             "where id_number in "+
             "<foreach collection='ids' item='id' open='(' separator=',' close=')'>"+
                 "#{id,typeHandler=com.unicom.account.handler.EncryptTypeHandler}"+
