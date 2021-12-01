@@ -3,6 +3,7 @@ package com.unicom.roleRightShiro.mapper;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -156,6 +157,25 @@ public interface OrgMapper {
 
     @Select("select id,t_number as tNumber from sys_organization where name=#{name}")
     Map<String,Object> selectOrgByName(@Param("name") Object name);
+
+
+
+
+
+    @Select(
+            "WITH RECURSIVE td AS (\n" +
+                    "              SELECT code ,name as label,pcode,level FROM area_code_2021   where code='430000000000'\n" +
+                    "         UNION  \n" +
+                    "              SELECT c.code,c.name as label ,c.pcode,c.level  FROM area_code_2021 c ,td WHERE c.pcode = td.code\n" +
+                    "          ) SELECT * FROM td where td.LEVEL<5  ORDER BY td.code"
+    )
+    Collection<Map<String,Object>> getOrgJson();
+
+
+    @Select(
+            "select  code ,name as label,pcode,level FROM area_code_2021 where pcode=#{pcode} "
+    )
+    Collection<Map<String,Object>> getPOrg(Map<String,Object> parm);
 
 
     int addProject();

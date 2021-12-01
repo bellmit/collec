@@ -221,6 +221,46 @@ public class OrgServiceImpl implements OrgService {
 		return this.orgMapper.selectRoot(orgId);
 	}
 
+
+	public Map<String,Object> toJson(){
+
+		Collection<Map<String,Object>> coll=this.orgMapper.getOrgJson();
+
+		List<Map<String,Object>> means=coll.stream().filter(m->Objects.equals(m.get("pcode")+"","0")).map((m)->{
+			m.put("plabel","中国");
+			m.put("children",getChild(m,coll));
+			return m;
+		}).collect(Collectors.toList());
+
+
+
+		return ResponseUtils.responseSuccessData(means.get(0));
+
+
+
+	}
+
+
+	@Override
+	public Map<String,Object> getRegion(Map<String,Object> parm){
+		return ResponseUtils.responseSuccessData(this.orgMapper.getPOrg(parm));
+
+	}
+
+
+	private Collection<Map<String,Object>> getChild(Map<String,Object> root,Collection<Map<String,Object>> all){
+		Collection<Map<String,Object>> child=all.stream().filter(m->{
+			return Objects.equals(m.get("pcode")+"",root.get("code")+"");
+		}).map(
+				(m)->{
+					m.put("plabel",root.get("label"));
+					m.put("children",getChild(m,all));
+					return m;
+				}
+		).collect(Collectors.toList());
+
+		return child;
+	}
 //	public static void main(String[] args) {
 //		Object s="1";
 //		Object c=Integer.parseInt("1");

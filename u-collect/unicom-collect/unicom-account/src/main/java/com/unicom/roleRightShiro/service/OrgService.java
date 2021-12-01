@@ -24,9 +24,13 @@ public interface OrgService {
 
     public Collection<Map<String,Object>> listChild(Map<String,Object> parm);
 
+    public Map<String,Object> toJson();
+
 
     public Integer selectInId(Map<String,Object> parms);
 
     public Map<String,Object> selectRootId(Object orgId);
+
+    public Map<String,Object> getRegion(Map<String,Object> parm);
 
 }

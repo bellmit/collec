@@ -107,6 +107,20 @@ public class OrgController {
 	}
 
 
+//	@RequestMapping(value = "/tojson/json", method = RequestMethod.GET)
+//	public Map<String, Object> cse() {
+//
+//		return orgService.toJson();
+//	}
+
+
+	@RequestMapping(value = "/getRegion", method = RequestMethod.GET)
+	public Map<String, Object> getRegion(@RequestParam Map<String,Object> parm) {
+
+		return orgService.getRegion(parm);
+	}
+
+
 
 
 }
