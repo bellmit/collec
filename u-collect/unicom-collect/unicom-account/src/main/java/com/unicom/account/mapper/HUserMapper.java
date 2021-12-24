@@ -10,15 +10,8 @@ import java.util.Map;
 public interface HUserMapper {
 
     @Select("<script>" +
-            "select a.id,a.name,a.id_number,a.tel,a.org_Id as orgId, a.org_name as orgName,a.remark,if(a.id_number=a.remark,1,0) as  isHead, CONCAT((select name from h_user where id_number=a.remark" +
-            "<if  test=\"orgId !='' and orgId !=null\">   " +
-            " and  org_id  in(" +
-            "  WITH RECURSIVE td AS (\r" +
-            "    SELECT id FROM sys_organization   where id=#{orgId} " +
-            "    UNION  " +
-            "    SELECT c.id FROM sys_organization c ,td WHERE c.parentId = td.id " +
-            " ) SELECT * FROM td ORDER BY td.id )  "+
-            "  </if>" +
+            "select a.id,a.name,a.id_number,a.tel,a.org_Id as orgId, a.org_name as orgName,a.remark,if(a.id_number=a.remark,1,0) as  isHead, CONCAT((select name from h_user where id_number=a.remark and root_org_id=a.root_org_id " +
+
             "),'户') as fname "+
             " from "+
             " h_user a " +

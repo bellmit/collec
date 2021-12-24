@@ -201,6 +201,13 @@
 
     <repositories>
         <repository>
+            <id>tencent</id>
+            <name>tencent maven mirror</name>
+            <url>https://mirrors.tencent.com/nexus/repository/maven-public/</url>
+        </repository>
+
+
+        <repository>
             <!-- id必须唯一 -->
             <id>aliyun-repository</id>
             <!-- 见名知意即可 -->
